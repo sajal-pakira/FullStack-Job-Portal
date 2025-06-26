@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 const AppLayout = () => {
   return (
     <div>
-      <h1>AppLayout</h1>
+      <div className="grid-background"></div>
       <Outlet />
     </div>
   );
