@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const AppLayout = () => {
   return (
@@ -11,7 +11,7 @@ const AppLayout = () => {
         <Outlet />
       </main>
       <div className="p-10 mt-10 text-center bg-gray-800">
-        made with 💕 by SAJAL PAKIRA
+        made with 💞 by <Link to="https://www.linkedin.com/in/sajal-pakira-13661b241/">SAJAL PAKIRA</Link>
       </div>
     </div>
   );
