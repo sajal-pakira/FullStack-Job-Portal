@@ -9,6 +9,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/?sign-in=true" />;
   }
 
+  // check onboarding status
   return children;
 };
 
