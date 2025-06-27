@@ -23,10 +23,10 @@ const LandingPage = () => {
       </section>
       <div>
         <Link to="/jobs">
-        <Button>Find Jobs</Button>
+        <Button variant="blue" size="xl">Find Jobs</Button>
         </Link>
         <Link to="/post-job">
-        <Button>Post a Job</Button>
+        <Button variant="destructive" size="xl">Post a Job</Button>
         </Link>
       </div>
       <section></section>
