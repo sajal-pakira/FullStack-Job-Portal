@@ -8,6 +8,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import companies from "../data/companies.json";
 import Autoplay from "embla-carousel-autoplay";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.jsx";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import faqs from "../data/faqs.json";
 
 const LandingPage = () => {
   return (
@@ -40,7 +54,7 @@ const LandingPage = () => {
           </Button>
         </Link>
       </div>
-       {/* Carousel */}
+      {/* Carousel */}
       <Carousel
         plugins={[
           Autoplay({
@@ -64,8 +78,38 @@ const LandingPage = () => {
         </CarouselContent>
       </Carousel>
       {/* banner */}
-      <img className="w-full" src="/banner.jpeg" alt="Banner" />
-      <section></section>
+      <img className="w-full" src="/banner.jpeg" alt="BanCardActionner" />
+      {/* card */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>For Job Seekers </CardTitle>
+          </CardHeader>
+          <CardContent>
+            Search and Apply for jobs, track your applications and many more
+            features to help you land your dream job.
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>For Employers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            Post jobs, Manage applications and find the best candidates.
+          </CardContent>
+        </Card>
+      </section>
+
+      <Accordion type="single" collapsible>
+        {faqs.map((faq, index) => {
+          return (
+            <AccordionItem key={index} value={`item-${index + 1}`}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          );
+        })}
+      </Accordion>
     </main>
   );
 };
