@@ -8,7 +8,7 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
-import { BriefcaseBusiness, PenBox } from "lucide-react";
+import { BriefcaseBusiness, Heart, PenBox } from "lucide-react";
 
 const Header = () => {
   const [showSignIn, setShowSignIn] = useState(false);
@@ -52,7 +52,7 @@ const Header = () => {
           <Link to="/post-job"></Link>
           <UserButton
             appearance={{
-              elemests: {
+              elements: {
                 avatarBox: "h-10 w-10",
               },
             }}
@@ -62,6 +62,11 @@ const Header = () => {
                 label="My Jobs"
                 labelIcon={<BriefcaseBusiness size={15} />}
                 href="/my-jobs"
+              />
+              <UserButton.Link
+                label="Saved Jobs"
+                labelIcon={<Heart size={15} />}
+                href="/saved-jobs"
               />
             </UserButton.MenuItems>
           </UserButton>
