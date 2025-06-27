@@ -24,8 +24,9 @@ const Header = () => {
     if (e.target === e.currentTarget) {
       // Close the sign-in modal if the overlay is clicked
       setShowSignIn(false);
+      setSearch({})
     }
-    setShowSignIn(false);
+    
   };
   return (
     <>
