@@ -8,7 +8,7 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
-import { PenBox } from "lucide-react";
+import { BriefcaseBusiness, PenBox } from "lucide-react";
 
 const Header = () => {
   const [showSignIn, setShowSignIn] = useState(false);
@@ -24,9 +24,8 @@ const Header = () => {
     if (e.target === e.currentTarget) {
       // Close the sign-in modal if the overlay is clicked
       setShowSignIn(false);
-      setSearch({})
+      setSearch({});
     }
-    
   };
   return (
     <>
@@ -51,7 +50,21 @@ const Header = () => {
             Post a Job
           </Button>
           <Link to="/post-job"></Link>
-          <UserButton />
+          <UserButton
+            appearance={{
+              elemests: {
+                avatarBox: "h-10 w-10",
+              },
+            }}
+          >
+            <UserButton.MenuItems>
+              <UserButton.Link
+                label="My Jobs"
+                labelIcon={<BriefcaseBusiness size={15} />}
+                href="/my-jobs"
+              />
+            </UserButton.MenuItems>
+          </UserButton>
         </SignedIn>
       </nav>
 
