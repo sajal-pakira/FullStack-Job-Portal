@@ -4,13 +4,13 @@ import { Link, Outlet } from "react-router-dom";
 
 const AppLayout = () => {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <div className="grid-background"></div>
-      <main className="min-h-screen container p-10">
+      <main className="min-h-screen container p-5">
         <Header />
         <Outlet />
       </main>
-      <div className="p-10 mt-10 text-center bg-gray-800">
+      <div className="p-6 mt-6 text-center bg-gray-800 w-full">
         made with 💞 by <Link to="https://www.linkedin.com/in/sajal-pakira-13661b241/">SAJAL PAKIRA</Link>
       </div>
     </div>
