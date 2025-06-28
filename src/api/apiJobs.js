@@ -15,9 +15,14 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
   }
 
   const { data, error } = await query;
-  if (error) {
-    console.error("Error in fetching jobs : ", error);
-    return null;
-  }
+  // if (error) {
+  //   console.error("Error in fetching jobs : ", error);
+  //   return null;
+  // }
+
+  console.log("DATA:", data);
+  console.log("ERROR:", error);
+  if (error) return [];
+
   return data;
 }

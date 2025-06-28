@@ -14,10 +14,10 @@ const useFetch = (cb, options = {}) => {
 
     try {
       const supabseAccessToken = await session.getToken({
-        template: "GetHired",
+        template: "GetHirrd",
       });
 
-      const response = await cb(supabseAccessToken, options, args);
+      const response = await cb(supabseAccessToken, options, ...args);
       setData(response);
       setError(null);
     } catch (err) {

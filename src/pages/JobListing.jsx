@@ -15,6 +15,7 @@ const JobListing = () => {
     fn: fnJobs,
     data: jobs,
     loading: loadingJobs,
+    error,
   } = useFetch(getJobs, {
     location,
     company_id,
@@ -29,6 +30,13 @@ const JobListing = () => {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
   }
 
+  console.log("✅ Jobs fetched from Supabase:", jobs);
+  console.log("📦 Current filter options:", {
+    location,
+    company_id,
+    searchQuery,
+  });
+
   return (
     <div>
       <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
@@ -42,9 +50,12 @@ const JobListing = () => {
       {loadingJobs === false && (
         <div>
           {jobs?.length ? (
-            jobs.map((job) => {
-              return <span key={job.id}>{job}</span>;
-            })
+            jobs.map((job) => (
+              <div key={job.id} className="mb-4 p-4 rounded-md shadow">
+                <h2 className="text-xl font-semibold">{job.title}</h2>
+                <p className="text-md text-gray-600">📍 {job.location}</p>
+              </div>
+            ))
           ) : (
             <div>No jobs found😓</div>
           )}
