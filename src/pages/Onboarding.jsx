@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/clerk-react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 
 const Onboarding = () => {
@@ -8,8 +9,27 @@ const Onboarding = () => {
   if (!isLoaded) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
   }
+  const navigate = useNavigate();
+  const handleRoleSelection = async (role) => {
+    await user
+      .update({
+        unsafeMetadata: { role },
+      })
+      .then(() => {
+        navigate(role === "recruiter" ? "/post-job" : "/jobs");
+      })
+      .catch((err) => {
+        console.log("Error updating role", err);
+      });
+  };
 
-  const handleRoleSelection = () => {};
+  useEffect(() => {
+    if (user?.unsafeMetadata?.role) {
+      navigate(
+        user?.unsafeMetadata?.role === "recruiter" ? "/post-job" : "/jobs"
+      );
+    }
+  }, [user]);
 
   return (
     <div className="flex flex-col justify-center items-center mt-32">
@@ -20,14 +40,18 @@ const Onboarding = () => {
         <Button
           variant="blue"
           className="h-36 text-2xl px-20 md:px-30 lg:px-40"
-          onClick={() => handleRoleSelection("candidate")}
+          onClick={() => {
+            handleRoleSelection("candidate");
+          }}
         >
           Candidate
         </Button>
         <Button
           variant="destructive"
           className="h-36 text-2xl px-20 md:px-30 lg:px-40"
-          onClick={() => handleRoleSelection("recruiter")}
+          onClick={() => {
+            handleRoleSelection("recruiter");
+          }}
         >
           Recruiter
         </Button>
