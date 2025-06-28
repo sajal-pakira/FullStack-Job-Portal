@@ -17,16 +17,16 @@ try {
           template: "GetHirred",
         });
 
-    const response = await cb(supabseAccessToken,options,args)
-    setData(response)
-    setError(null)
+    const response = await cb(supabseAccessToken,options,args);
+    setData(response);
+    setError(null);
 } catch (err) {
-    setError(err)
+    setError(err);
 } finally{
-    setLoading(false)
+    setLoading(false);
 }
-  return {fn,data,loading,error}
+  return {fn,data,loading,error};
 };
 
 
-export default useFetch
+export default useFetch;
