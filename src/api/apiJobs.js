@@ -2,6 +2,10 @@ import supabaseClient from "@/utils/supabase";
 
 export async function getJobs(token, { location, company_id, searchQuery }) {
   const supabase = await supabaseClient(token);
+
+  // const { data: userData } = await supabase.auth.getUser(); // 🧠 get user_id
+  // const userId = userData?.user?.id;
+
   let query = supabase
     .from("jobs")
     .select("*, company:companies(name,logo_url), saved:saved_jobs(id)");
@@ -24,7 +28,55 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
 
   console.log("DATA:", data);
   console.log("ERROR:", error);
-  if (error) return [];
+  if (error) {
+    console.error("Supabase error:", error);
+    return [];
+  }
+
+  //  isSaved flag
+  // const jobsWithSaved = data.map((job) => ({
+  //   ...job,
+  //   isSaved: job.saved?.some((s) => s.user_id === userId),
+  // }));
 
   return data;
+}
+
+export async function saveJob(token, { alreadySaved }, saveData) {
+  const supabase = await supabaseClient(token);
+  if (alreadySaved) {
+    const { data, error: deleteError } = await supabase
+      .from("saved_jobs")
+      .delete()
+      .eq("job_id", saveData.job_id);
+
+    console.log("DATA:", data);
+
+    if (deleteError) {
+      console.error("Error in deleting saved job", deleteError);
+      return null;
+    }
+
+    return data;
+  } else {
+    const { data, error: insertError } = await supabase
+      .from("saved_jobs")
+      .insert([saveData])
+      .select();
+
+    console.log("DATA:", data);
+
+    if (insertError) {
+      console.error("Error in fetching jobs", insertError);
+      return null;
+    }
+
+    return data;
+  }
+
+  //  isSaved flag
+  // const jobsWithSaved = data.map((job) => ({
+  //   ...job,
+  //   isSaved: job.saved?.some((s) => s.user_id === userId),
+  // }));
 }
