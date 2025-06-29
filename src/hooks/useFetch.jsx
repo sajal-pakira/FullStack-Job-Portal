@@ -14,7 +14,7 @@ const useFetch = (cb, options = {}) => {
 
     try {
       const supabseAccessToken = await session.getToken({
-        template: "GetHirred",
+        template: "GetHirrd",
       });
 
       const response = await cb(supabseAccessToken, options, ...args);
