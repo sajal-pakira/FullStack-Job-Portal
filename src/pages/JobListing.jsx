@@ -1,4 +1,5 @@
 import { getJobs } from "@/api/apiJobs";
+import JobCard from "@/components/JobCard";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
@@ -50,12 +51,7 @@ const JobListing = () => {
       {loadingJobs === false && (
         <div>
           {jobs?.length ? (
-            jobs.map((job) => (
-              <div key={job.id} className="mb-4 p-4 rounded-md shadow">
-                <h2 className="text-xl font-semibold">{job.title}</h2>
-                <p className="text-md text-gray-600">📍 {job.location}</p>
-              </div>
-            ))
+            jobs.map((job) => <JobCard key={job.id} job={job} />)
           ) : (
             <div>No jobs found😓</div>
           )}
