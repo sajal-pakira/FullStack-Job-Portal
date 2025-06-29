@@ -7,7 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { MapPinIcon, Trash2Icon } from "lucide-react";
+import { Heart, MapPinIcon, Trash2Icon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 const JobCard = ({
   job,
@@ -52,6 +54,14 @@ const JobCard = ({
         <hr />
         {job.description}
       </CardContent>
+      <CardFooter className="flex gap-2">
+        <Link to={`/job/${job.id}`} className="flex-1">
+          <Button variant="secondary" className="w-full">
+            More Details
+          </Button>
+        </Link>
+        <Heart className="cursor-pointer" size={15} stroke="red" fill="red" />
+      </CardFooter>
     </Card>
   );
 };
