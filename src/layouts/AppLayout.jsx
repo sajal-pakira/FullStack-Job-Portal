@@ -11,7 +11,13 @@ const AppLayout = () => {
         <Outlet />
       </main>
       <div className="p-6 mt-6 text-center bg-gray-800 w-full">
-        made with 💞 by <Link to="https://www.linkedin.com/in/sajal-pakira-13661b241/">SAJAL PAKIRA</Link>
+        Made With 💞 By{" "}
+        <Link
+          className="cursor-pointer text-gray-950 bg-gray-300 p-1"
+          to="https://www.linkedin.com/in/sajal-pakira-13661b241/"
+        >
+          SAJAL PAKIRA
+        </Link>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ const JobCard = ({
   const { user } = useUser();
 
   return (
-    <Card className="mb-3">
+    <Card className="">
       <CardHeader>
         <CardTitle className="flex justify-between font-bold">
           {job.title}

@@ -49,7 +49,7 @@ const JobListing = () => {
       )}
 
       {loadingJobs === false && (
-        <div>
+        <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {jobs?.length ? (
             jobs.map((job) => <JobCard key={job.id} job={job} />)
           ) : (
