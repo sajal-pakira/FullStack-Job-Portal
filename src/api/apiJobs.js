@@ -1,7 +1,10 @@
 import supabaseClient from "@/utils/supabase";
 
 export async function getJobs(token, { location, company_id, searchQuery }) {
-  const supabase = await supabaseClient(token);
+
+  try {
+    
+const supabase = await supabaseClient(token);
 
   // const { data: userData } = await supabase.auth.getUser(); // 🧠 get user_id
   // const userId = userData?.user?.id;
@@ -39,7 +42,13 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
   //   isSaved: job.saved?.some((s) => s.user_id === userId),
   // }));
 
-  return data;
+  return data || null;
+
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+    return []; // Return empty array on error
+  }
+  
 }
 
 export async function saveJob(token, { alreadySaved }, saveData) {
