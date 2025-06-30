@@ -16,8 +16,7 @@
 
 // export default supabaseClient;
 
-
-
+// utils/supabase.js
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -30,8 +29,8 @@ const supabaseClient = async (token) => {
     supabase = createClient(supabaseUrl, supabaseKey);
   }
 
-  // Important: update token if provided
   if (token) {
+    console.log("🔁 Using Supabase client with token:", token?.slice(0, 10)); // ✅ Place this here
     await supabase.auth.setAuth(token);
   }
 
