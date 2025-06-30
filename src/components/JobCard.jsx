@@ -34,6 +34,7 @@ const JobCard = ({
       job_id: job.id,
     });
     onJobSaved();
+    console.log("Saving job with user_id:", user.id);
   };
 
   useEffect(() => {

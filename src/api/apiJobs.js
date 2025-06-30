@@ -44,6 +44,13 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
 
 export async function saveJob(token, { alreadySaved }, saveData) {
   const supabase = await supabaseClient(token);
+
+  // Decode and log the token
+  const decoded = JSON.parse(atob(token.split(".")[1]));
+  console.log("✅ DECODED JWT:", decoded);
+  console.log("🧠 saveData.user_id =", saveData.user_id);
+  console.log("🔑 JWT sub =", decoded.sub);
+
   if (alreadySaved) {
     const { data, error: deleteError } = await supabase
       .from("saved_jobs")
