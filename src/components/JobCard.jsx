@@ -1,4 +1,3 @@
-
 import { Heart, MapPinIcon, Trash2Icon } from "lucide-react";
 import { Button } from "./ui/button";
 import {
@@ -9,7 +8,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Link } from "react-router-dom";
-import useFetch from "@/hooks/use-fetch";
+import useFetch from "@/hooks/useFetch";
 import { deleteJob, saveJob } from "@/api/apiJobs";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
@@ -78,7 +77,7 @@ const JobCard = ({
           </div>
         </div>
         <hr />
-        {job.description.substring(0, job.description.indexOf("."))}.
+        {job.description}.
       </CardContent>
       <CardFooter className="flex gap-2">
         <Link to={`/job/${job.id}`} className="flex-1">
