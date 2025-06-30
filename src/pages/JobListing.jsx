@@ -14,8 +14,9 @@ const JobListing = () => {
 
   const {
     fn: fnJobs,
-    data: jobs,
+    data: jobs = [], // Default to empty array
     loading: loadingJobs,
+    error: jobsError,
   } = useFetch(getJobs, {
     location,
     company_id,
@@ -43,11 +44,17 @@ const JobListing = () => {
         Latest Jobs
       </h1>
 
+      {jobsError && (
+        <div className="text-red-500">
+          Error loading jobs: {jobsError.message}
+        </div>
+      )}
+
       {loadingJobs && (
         <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
       )}
 
-      {loadingJobs === false && (
+      {!loadingJobs && (
         <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {jobs?.length ? (
             jobs.map((job) => (

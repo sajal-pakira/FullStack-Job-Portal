@@ -1,54 +1,50 @@
 import supabaseClient from "@/utils/supabase";
 
 export async function getJobs(token, { location, company_id, searchQuery }) {
-
   try {
-    
-const supabase = await supabaseClient(token);
+    const supabase = await supabaseClient(token);
 
-  // const { data: userData } = await supabase.auth.getUser(); // 🧠 get user_id
-  // const userId = userData?.user?.id;
+    // const { data: userData } = await supabase.auth.getUser(); // 🧠 get user_id
+    // const userId = userData?.user?.id;
 
-  let query = supabase
-    .from("jobs")
-    .select("*, company:companies(name,logo_url), saved:saved_jobs(id)");
+    let query = supabase
+      .from("jobs")
+      .select("*, company:companies(name,logo_url), saved:saved_jobs(id)");
 
-  if (location) {
-    query = query.eq("location", location);
-  }
-  if (company_id) {
-    query = query.eq("company_id", company_id);
-  }
-  if (searchQuery) {
-    query = query.ilike("title", `%${searchQuery}%`);
-  }
+    if (location) {
+      query = query.eq("location", location);
+    }
+    if (company_id) {
+      query = query.eq("company_id", company_id);
+    }
+    if (searchQuery) {
+      query = query.ilike("title", `%${searchQuery}%`);
+    }
 
-  const { data, error } = await query;
-  // if (error) {
-  //   console.error("Error in fetching jobs : ", error);
-  //   return null;
-  // }
+    const { data, error } = await query;
+    // if (error) {
+    //   console.error("Error in fetching jobs : ", error);
+    //   return null;
+    // }
 
-  console.log("DATA:", data);
-  console.log("ERROR:", error);
-  if (error) {
-    console.error("Supabase error:", error);
-    return [];
-  }
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
+    if (error) {
+      console.error("Supabase error:", error);
+      return [];
+    }
 
-  //  isSaved flag
-  // const jobsWithSaved = data.map((job) => ({
-  //   ...job,
-  //   isSaved: job.saved?.some((s) => s.user_id === userId),
-  // }));
+    //  isSaved flag
+    // const jobsWithSaved = data.map((job) => ({
+    //   ...job,
+    //   isSaved: job.saved?.some((s) => s.user_id === userId),
+    // }));
 
-  return data || null;
-
+    return data || null;
   } catch (error) {
     console.error("Error fetching jobs:", error);
     return []; // Return empty array on error
   }
-  
 }
 
 export async function saveJob(token, { alreadySaved }, saveData) {
@@ -73,7 +69,7 @@ export async function saveJob(token, { alreadySaved }, saveData) {
       return null;
     }
 
-   return data ?? [];
+    return data ?? [];
   } else {
     const { data, error: insertError } = await supabase
       .from("saved_jobs")
