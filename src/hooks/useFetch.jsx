@@ -17,7 +17,7 @@ const useFetch = (cb, options = {}) => {
         template: "GetHirrd",
       });
 
-      const response = await cb(supabseAccessToken, options, ...args);
+      const response = await cb(supabseAccessToken, ...args, options);
       setData(response);
       setError(null);
     } catch (err) {

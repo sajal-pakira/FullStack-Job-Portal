@@ -64,7 +64,7 @@ export async function saveJob(token, { alreadySaved }, saveData) {
       return null;
     }
 
-    return data;
+   return data ?? [];
   } else {
     const { data, error: insertError } = await supabase
       .from("saved_jobs")
