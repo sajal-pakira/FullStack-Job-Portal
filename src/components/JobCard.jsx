@@ -24,7 +24,7 @@ const JobCard = ({
     fn: fnSavedJobs,
     data: savedJobs,
     loading: loadingSavedJobs,
-  } = useFetch(saveJob);
+  } = useFetch(saveJob, { alreadySaved: saved });
 
   const { user } = useUser();
 
