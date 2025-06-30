@@ -1,5 +1,6 @@
-import { useUser } from "@clerk/clerk-react";
-import React, { useEffect, useState } from "react";
+
+import { Heart, MapPinIcon, Trash2Icon } from "lucide-react";
+import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -7,74 +8,77 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Heart, MapPinIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
-import { saveJob } from "@/api/apiJobs";
-import useFetch from "@/hooks/useFetch";
+import useFetch from "@/hooks/use-fetch";
+import { deleteJob, saveJob } from "@/api/apiJobs";
+import { useUser } from "@clerk/clerk-react";
+import { useEffect, useState } from "react";
+import { BarLoader } from "react-spinners";
 
 const JobCard = ({
   job,
-  isMyJob = false,
   savedInit = false,
-  onJobSaved = () => {},
+  onJobAction = () => {},
+  isMyJob = false,
 }) => {
   const [saved, setSaved] = useState(savedInit);
-  const {
-    fn: fnSavedJobs,
-    data: savedJobs,
-    loading: loadingSavedJobs,
-  } = useFetch(saveJob, { alreadySaved: saved });
 
   const { user } = useUser();
 
+  const { loading: loadingDeleteJob, fn: fnDeleteJob } = useFetch(deleteJob, {
+    job_id: job.id,
+  });
+
+  const {
+    loading: loadingSavedJob,
+    data: savedJob,
+    fn: fnSavedJob,
+  } = useFetch(saveJob);
+
   const handleSaveJob = async () => {
-    await fnSavedJobs({
+    await fnSavedJob({
       user_id: user.id,
       job_id: job.id,
     });
-    onJobSaved();
-    console.log("Saving job with user_id:", user.id);
+    onJobAction();
+  };
+
+  const handleDeleteJob = async () => {
+    await fnDeleteJob();
+    onJobAction();
   };
 
   useEffect(() => {
-    if (savedJobs !== undefined) setSaved(savedJobs?.length > 0);
-  }, [savedJobs]);
+    if (savedJob !== undefined) setSaved(savedJob?.length > 0);
+  }, [savedJob]);
 
   return (
-    <Card className="">
-      <CardHeader>
+    <Card className="flex flex-col">
+      {loadingDeleteJob && (
+        <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
+      )}
+      <CardHeader className="flex">
         <CardTitle className="flex justify-between font-bold">
           {job.title}
-
           {isMyJob && (
             <Trash2Icon
-              size={18}
               fill="red"
+              size={18}
               className="text-red-300 cursor-pointer"
+              onClick={handleDeleteJob}
             />
           )}
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col flex-1 gap-4">
+      <CardContent className="flex flex-col gap-4 flex-1">
         <div className="flex justify-between">
-          {job.company && (
-            <img
-              src={job.company.logo_url}
-              alt="company logo"
-              className="h-6"
-            />
-          )}
-          <div
-            className="flex items-center gap-2 
-          "
-          >
-            <MapPinIcon size={15} />
-            {job.location}
+          {job.company && <img src={job.company.logo_url} className="h-6" />}
+          <div className="flex gap-2 items-center">
+            <MapPinIcon size={15} /> {job.location}
           </div>
         </div>
         <hr />
-        {job.description}
+        {job.description.substring(0, job.description.indexOf("."))}.
       </CardContent>
       <CardFooter className="flex gap-2">
         <Link to={`/job/${job.id}`} className="flex-1">
@@ -84,20 +88,15 @@ const JobCard = ({
         </Link>
         {!isMyJob && (
           <Button
-            className="w-15"
             variant="outline"
+            className="w-15"
             onClick={handleSaveJob}
-            disabled={loadingSavedJobs}
+            disabled={loadingSavedJob}
           >
             {saved ? (
-              <Heart
-                className="cursor-pointer"
-                size={15}
-                stroke="red"
-                fill="red"
-              />
+              <Heart size={20} fill="red" stroke="red" />
             ) : (
-              <Heart className="cursor-pointer" size={15} />
+              <Heart size={20} />
             )}
           </Button>
         )}
