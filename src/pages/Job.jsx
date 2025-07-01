@@ -1,9 +1,20 @@
-import React from 'react'
+import { getSingleJob } from "@/api/apiJobs";
+import useFetch from "@/hooks/useFetch";
+import { useUser } from "@clerk/clerk-react";
+import { useParams } from "react-router-dom";
 
 const Job = () => {
-  return (
-    <div>Job</div>
-  )
-}
+  const { isLoaded, user } = useUser();
+  const { id } = useParams();
 
-export default Job
+  const {
+    fn: fnJob,
+    data: job,
+    loading: loadingJob,
+  } = useFetch(getSingleJob, {
+    job_id: id,
+  });
+  return <div></div>;
+};
+
+export default Job;
