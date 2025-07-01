@@ -83,7 +83,7 @@ const Job = () => {
       {job?.recruiter_id === user?.id && (
         <Select onValueChange={handleStatusChange}>
           <SelectTrigger
-            className={`w-full ${job?.isOpen ? "bg-green-900" : "bg-red-900"}`}
+            className={`w-full ${job?.isOpen ? "bg-green-950" : "bg-red-950"}`}
           >
             <SelectValue
               placeholder={
