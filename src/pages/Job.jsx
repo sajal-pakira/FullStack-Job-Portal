@@ -1,5 +1,6 @@
 import { getSingleJob, updateHiringStatus } from "@/api/apiJobs";
-import applyJobDrawer from "@/components/applyJob";
+import ApplyJobDrawer from "@/components/applyJob";
+
 import {
   Select,
   SelectContent,
@@ -112,8 +113,9 @@ const Job = () => {
       />
 
       {job?.recruiter_id !== user?.id && (
-        <applyJobDrawer
+        <ApplyJobDrawer
           job={job}
+          user={user}
           fetchJob={fnJob}
           applied={job?.applications?.find((ap) => ap.candidate_id === user.id)}
         />
