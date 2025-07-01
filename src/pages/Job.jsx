@@ -82,13 +82,18 @@ const Job = () => {
       {/* hiring status */}
       {job?.recruiter_id === user?.id && (
         <Select onValueChange={handleStatusChange}>
-          <SelectTrigger>
-            <SelectValue placeholder="Filter by Location" />
+          <SelectTrigger
+            className={`w-full ${job?.isOpen ? "bg-green-900" : "bg-red-900"}`}
+          >
+            <SelectValue
+              placeholder={
+                "Hiring Status" + (job?.isOpen ? "(Open)" : "(Closed)")
+              }
+            />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem key={state.isoCode} value={state.name}>
-              {state.name}
-            </SelectItem>
+            <SelectItem value="open">Open</SelectItem>
+            <SelectItem value="closed">Closed</SelectItem>
           </SelectContent>
         </Select>
       )}
