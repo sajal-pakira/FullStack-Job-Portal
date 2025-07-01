@@ -59,11 +59,19 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
               <Label htmlFor="Post Graduate">Post Graduate</Label>
             </div>
           </RadioGroup>
+          <Input
+            type="file"
+            accept=".pdf, .doc, .docx"
+            className="flex-1 file:text-gray-500"
+          />
+
+          <Button variant="blue" size="lg" type="submit">
+            Apply
+          </Button>
         </form>
 
         <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose>
+          <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
         </DrawerFooter>
