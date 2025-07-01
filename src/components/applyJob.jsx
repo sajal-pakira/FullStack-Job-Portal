@@ -31,10 +31,15 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
           <DrawerDescription>Please fill the form below</DrawerDescription>
         </DrawerHeader>
 
-        <form action="">
+        <form className="flex flex-col gap-4 pb-0 p-4">
           <Input
             type="number"
-            placeholder="Years of experience"
+            placeholder="Years of Experience"
+            className="flex-1"
+          />
+          <Input
+            type="text"
+            placeholder="Skills (separated by comma)"
             className="flex-1"
           />
         </form>
