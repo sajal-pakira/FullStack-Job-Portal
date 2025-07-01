@@ -1,7 +1,7 @@
 import { getSingleJob } from "@/api/apiJobs";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
-import { Briefcase, MapPinIcon } from "lucide-react";
+import { Briefcase, DoorClosed, DoorOpen, MapPinIcon } from "lucide-react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
@@ -43,7 +43,18 @@ const Job = () => {
         <div className="flex gap-2">
           <Briefcase />
           {job?.applications?.length}
-          Applications
+          <p>Applicants</p>
+        </div>
+        <div className="flex gap-2">
+          {job?.isOpen ? (
+            <>
+              <DoorOpen /> Open
+            </>
+          ) : (
+            <>
+              <DoorClosed /> Close
+            </>
+          )}
         </div>
       </div>
     </div>
