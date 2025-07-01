@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
-// import { State } from "country-state-city";
+
 import { BarLoader } from "react-spinners";
 import useFetch from "@/hooks/useFetch";
 
@@ -16,9 +16,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// import { getCompanies } from "@/api/apiCompanies";
 import { getJobs } from "@/api/apiJobs";
 import { getCompanies } from "@/api/apiCompanies";
+import { State } from "country-state-city";
 
 const JobListing = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,14 +29,18 @@ const JobListing = () => {
 
   const {
     fn: fnJobs,
-    data: jobs,
+    data: jobs = [],
     loading: loadingJobs,
   } = useFetch(getJobs, {
     location,
     company_id,
     searchQuery,
   });
-  const { fn: fnCompanies, data: companies } = useFetch(getCompanies);
+  const {
+    fn: fnCompanies,
+    data: companies = [],
+    loading: loadingCompanies,
+  } = useFetch(getCompanies);
 
   useEffect(() => {
     if (isLoaded) fnCompanies();
@@ -78,6 +82,45 @@ const JobListing = () => {
           Search
         </Button>
       </form>
+
+      <div>
+        <Select value={location} onValueChange={(value) => setLocation(value)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Filter by Location" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {State.getStatesOfCountry("IN").map((state) => {
+                return (
+                  <SelectItem key={state.isoCode} value={state.name}>
+                    {state.name}
+                  </SelectItem>
+                );
+              })}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={company_id}
+          onValueChange={(value) => setCompany_id(value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Filter by Company" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {companies.map((company) => {
+                return (
+                  <SelectItem key={company.id} value={company.id}>
+                    {company.name}
+                  </SelectItem>
+                );
+              })}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
 
       {loadingJobs && (
         <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
