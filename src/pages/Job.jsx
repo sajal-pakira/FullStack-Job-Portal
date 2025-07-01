@@ -24,8 +24,18 @@ const Job = () => {
   if (!isLoaded || loadingJob) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
   }
+  console.log(job);
 
-  return <div></div>;
+  return (
+    <div>
+      <div>
+        <h1 className="gradient-title font-extrabold pb-3 text-4xl sm:text-6xl">
+          {job?.title}
+        </h1>
+        <img src={job?.company?.logo_url} alt={job?.title} className="h-12" />
+      </div>
+    </div>
+  );
 };
 
 export default Job;

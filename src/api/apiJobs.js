@@ -58,7 +58,7 @@ export async function getSingleJob(token, { job_id }) {
   const { data, error } = await query;
 
   if (error) {
-    console.error("Error fetching Job:", error);
+    console.error("Error fetching single Job:", error);
     return null;
   }
 
