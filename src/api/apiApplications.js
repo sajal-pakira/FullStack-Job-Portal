@@ -3,8 +3,11 @@ import supabaseClient from "@/utils/supabase";
 export async function applyToJob(token, _, jobData) {
   try {
     const supabase = await supabaseClient(token);
+    
     const random = Math.floor(Math.random() * 90000);
     const fileName = `resume-${random}-${jobData.candidate_id}`;
+    await supabase.storage.from("resumes").upload(fileName, jobData.resume);
+
     const { data, error } = await supabase.from("companies").select("*");
     if (error) {
       console.log("Error in fetching the companies", error);
