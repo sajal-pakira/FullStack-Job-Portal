@@ -1,6 +1,7 @@
 import { getSingleJob } from "@/api/apiJobs";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
+import MDEditor from "@uiw/react-md-editor";
 import { Briefcase, DoorClosed, DoorOpen, MapPinIcon } from "lucide-react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -65,6 +66,10 @@ const Job = () => {
       <h2 className="font-bold text-2xl sm:text-3xl">
         What we are looking for
       </h2>
+      <MDEditor.Markdown
+        source={job?.requirements}
+        className="bg-transparent sm:text-lg"
+      />
     </div>
   );
 };
