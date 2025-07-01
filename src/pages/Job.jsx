@@ -1,6 +1,14 @@
-import { getSingleJob } from "@/api/apiJobs";
+import { getSingleJob, updateHiringStatus } from "@/api/apiJobs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
+
 import MDEditor from "@uiw/react-md-editor";
 import { Briefcase, DoorClosed, DoorOpen, MapPinIcon } from "lucide-react";
 import { useEffect } from "react";
@@ -18,6 +26,18 @@ const Job = () => {
   } = useFetch(getSingleJob, {
     job_id: id,
   });
+  const {
+    fn: fnHiringStatus,
+    data: hiringStatus,
+    loading: loadingHiringStatus,
+  } = useFetch(updateHiringStatus, {
+    job_id: id,
+  });
+
+  const handleStatusChange = (value) => {
+    const isOpen = value === "open";
+    fnHiringStatus(isOpen).then(() => fnJob());
+  };
 
   useEffect(() => {
     if (isLoaded) fnJob();
@@ -60,6 +80,19 @@ const Job = () => {
       </div>
 
       {/* hiring status */}
+      {job?.recruiter_id === user?.id && (
+        <Select onValueChange={handleStatusChange}>
+          <SelectTrigger>
+            <SelectValue placeholder="Filter by Location" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem key={state.isoCode} value={state.name}>
+              {state.name}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      )}
+
       <h2 className="font-bold text-2xl sm:text-3xl">About the Job</h2>
       <p className="sm:text-lg">{job?.description}</p>
 
