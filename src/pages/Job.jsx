@@ -1,4 +1,5 @@
 import { getSingleJob, updateHiringStatus } from "@/api/apiJobs";
+import applyJobDrawer from "@/components/applyJob";
 import {
   Select,
   SelectContent,
@@ -80,6 +81,7 @@ const Job = () => {
       </div>
 
       {/* hiring status */}
+      {loadingHiringStatus && <BarLoader width={"100%"} color="#36d7b7" />}
       {job?.recruiter_id === user?.id && (
         <Select onValueChange={handleStatusChange}>
           <SelectTrigger
@@ -108,6 +110,14 @@ const Job = () => {
         source={job?.requirements}
         className="bg-transparent sm:text-lg"
       />
+
+      {job?.recruiter_id !== user?.id && (
+        <applyJobDrawer
+          job={job}
+          fetchJob={fnJob}
+          applied={job?.applications?.find((ap) => ap.candidate_id === user.id)}
+        />
+      )}
     </div>
   );
 };
