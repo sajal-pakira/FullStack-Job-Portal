@@ -18,6 +18,7 @@ import {
 
 // import { getCompanies } from "@/api/apiCompanies";
 import { getJobs } from "@/api/apiJobs";
+import { getCompanies } from "@/api/apiCompanies";
 
 const JobListing = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,14 +28,19 @@ const JobListing = () => {
   const { isLoaded } = useUser();
 
   const {
-    loading: loadingJobs,
-    data: jobs,
     fn: fnJobs,
+    data: jobs,
+    loading: loadingJobs,
   } = useFetch(getJobs, {
     location,
     company_id,
     searchQuery,
   });
+  const { fn: fnCompanies, data: companies } = useFetch(getCompanies);
+
+  useEffect(() => {
+    if (isLoaded) fnCompanies();
+  }, [isLoaded]);
 
   useEffect(() => {
     if (isLoaded) fnJobs();
@@ -57,6 +63,7 @@ const JobListing = () => {
       <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
         Latest Jobs
       </h1>
+
       <form
         onSubmit={handleSearch}
         className="h-14 flex flex-row w-full gap-2 items-center mb-3"
