@@ -57,6 +57,14 @@ const Job = () => {
           )}
         </div>
       </div>
+
+      {/* hiring status */}
+      <h2 className="font-bold text-2xl sm:text-3xl">About the Job</h2>
+      <p className="sm:text-lg">{job?.description}</p>
+
+      <h2 className="font-bold text-2xl sm:text-3xl">
+        What we are looking for
+      </h2>
     </div>
   );
 };
