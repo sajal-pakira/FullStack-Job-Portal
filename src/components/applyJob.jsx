@@ -12,12 +12,12 @@ import {
 
 const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
   return (
-    <Drawer open={applied ? false : true}>
+    <Drawer>
       <DrawerTrigger>
         <Button
           size="lg"
           variant={job?.isOpen && !applied ? "blue" : "destructive"}
-          disabled={!job.isOpen || applied}
+          disabled={!job?.isOpen || applied}
         >
           {job?.isOpen ? (applied ? "Applied" : "Apply") : "Hiring closed"}
         </Button>
@@ -25,7 +25,7 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>
-            Apply for ${job?.title} at ${job?.company?.name}
+            Apply for {job?.title} at {job?.company?.name}
           </DrawerTitle>
           <DrawerDescription>This action cannot be undone.</DrawerDescription>
         </DrawerHeader>
