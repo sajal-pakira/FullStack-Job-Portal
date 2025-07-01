@@ -38,7 +38,7 @@ const JobListing = () => {
   });
   const {
     fn: fnCompanies,
-    data: companies = [],
+    data: companies,
     loading: loadingCompanies,
   } = useFetch(getCompanies);
 
@@ -56,6 +56,12 @@ const JobListing = () => {
 
     const query = formData.get("search-query");
     if (query) setSearchQuery(query);
+  };
+
+  const clearFilters = () => {
+    setCompany_id("");
+    setLocation("");
+    setSearchQuery("");
   };
 
   if (!isLoaded) {
@@ -104,13 +110,18 @@ const JobListing = () => {
         <Select
           value={company_id}
           onValueChange={(value) => setCompany_id(value)}
+          disabled={loadingCompanies}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Filter by Company" />
+            <SelectValue
+              placeholder={
+                loadingCompanies ? "Loading companies..." : "Filter by Company"
+              }
+            />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {companies.map((company) => {
+              {companies?.map((company) => {
                 return (
                   <SelectItem key={company.id} value={company.id}>
                     {company.name}
@@ -120,6 +131,14 @@ const JobListing = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
+
+        <Button
+          onClick={clearFilters}
+          variant="destructive"
+          className="sm:w-1/2"
+        >
+          Clear Filters
+        </Button>
       </div>
 
       {loadingJobs && (
