@@ -38,7 +38,7 @@ const JobListing = () => {
   });
   const {
     fn: fnCompanies,
-    data: companies,
+    data: companies = [],
     loading: loadingCompanies,
   } = useFetch(getCompanies);
 
