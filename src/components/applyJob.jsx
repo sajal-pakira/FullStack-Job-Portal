@@ -13,7 +13,7 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
@@ -89,7 +89,9 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             <p className="text-red-500">{errors.skills.message}</p>
           )}
 
-          <RadioGroup defaultValue="option-one">
+<Controller
+name="education" control={control} render={({field})=(
+   <RadioGroup defaultValue="option-one">
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="Intermediate" id="Intermediate" />
               <Label htmlFor="Intermediate">Intermediate</Label>
@@ -103,6 +105,9 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
               <Label htmlFor="Post Graduate">Post Graduate</Label>
             </div>
           </RadioGroup>
+)}
+/>
+         
           <Input
             type="file"
             accept=".pdf, .doc, .docx"
