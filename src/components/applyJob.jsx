@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { Button } from "./ui/button";
 import {
   Drawer,
@@ -12,6 +13,17 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+
+const schema = z.object({
+  exprerience: z
+    .number()
+    .min(0, { message: "Experience must be at least 0" })
+    .int(),
+  skills: z.string().min(1, { message: "Skills are required" }),
+  education: z.enum(["Intermediate", "Under Graduate", "Post Graduate"], {
+    message: "Education is required",
+  }),
+});
 
 const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
   return (
