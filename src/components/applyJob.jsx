@@ -85,6 +85,10 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             {...register("skills")}
           />
 
+          {errors.skills && (
+            <p className="text-red-500">{errors.skills.message}</p>
+          )}
+
           <RadioGroup defaultValue="option-one">
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="Intermediate" id="Intermediate" />
