@@ -93,7 +93,7 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             name="education"
             control={control}
             render={({ field }) => (
-              <RadioGroup defaultValue="option-one">
+              <RadioGroup onValueChange={field.onChange} {...field}>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Intermediate" id="Intermediate" />
                   <Label htmlFor="Intermediate">Intermediate</Label>
