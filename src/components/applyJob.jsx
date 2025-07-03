@@ -37,7 +37,13 @@ const schema = z.object({
 });
 
 const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
-  useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+    reset,
+  } = useForm({
     resolver: zodResolver(schema),
   });
 
