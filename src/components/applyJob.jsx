@@ -73,10 +73,16 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             className="flex-1"
             {...register("exprerience", { valueAsNumber: true })}
           />
+
+          {errors.exprerience && (
+            <p className="text-red-500">{errors.exprerience.message}</p>
+          )}
+
           <Input
             type="text"
             placeholder="Skills (separated by comma)"
             className="flex-1"
+            {...register("skills")}
           />
 
           <RadioGroup defaultValue="option-one">
