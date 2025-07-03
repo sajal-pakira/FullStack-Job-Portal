@@ -89,25 +89,27 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             <p className="text-red-500">{errors.skills.message}</p>
           )}
 
-<Controller
-name="education" control={control} render={({field})=(
-   <RadioGroup defaultValue="option-one">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Intermediate" id="Intermediate" />
-              <Label htmlFor="Intermediate">Intermediate</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Under Graduate" id="Under Graduate" />
-              <Label htmlFor="Under Graduate">Under Graduate</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Post Graduate" id="Post Graduate" />
-              <Label htmlFor="Post Graduate">Post Graduate</Label>
-            </div>
-          </RadioGroup>
-)}
-/>
-         
+          <Controller
+            name="education"
+            control={control}
+            render={({ field }) => (
+              <RadioGroup defaultValue="option-one">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="Intermediate" id="Intermediate" />
+                  <Label htmlFor="Intermediate">Intermediate</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="Under Graduate" id="Under Graduate" />
+                  <Label htmlFor="Under Graduate">Under Graduate</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="Post Graduate" id="Post Graduate" />
+                  <Label htmlFor="Post Graduate">Post Graduate</Label>
+                </div>
+              </RadioGroup>
+            )}
+          />
+
           <Input
             type="file"
             accept=".pdf, .doc, .docx"
