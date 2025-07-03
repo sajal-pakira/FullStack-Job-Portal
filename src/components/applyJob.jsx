@@ -13,6 +13,8 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
   exprerience: z
@@ -35,6 +37,10 @@ const schema = z.object({
 });
 
 const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
+  useForm({
+    resolver: zodResolver(schema),
+  });
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
