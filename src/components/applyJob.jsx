@@ -71,6 +71,7 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             type="number"
             placeholder="Years of Experience"
             className="flex-1"
+            {...register("exprerience", { valueAsNumber: true })}
           />
           <Input
             type="text"
