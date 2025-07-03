@@ -23,6 +23,15 @@ const schema = z.object({
   education: z.enum(["Intermediate", "Under Graduate", "Post Graduate"], {
     message: "Education is required",
   }),
+  resume: z
+    .any()
+    .refine(
+      (file) =>
+        file[0] &&
+        (file[0].type === "application/pdf" ||
+          file[0].type === "application/msword"),
+      { message: "Only PDF or Word Documents are allowed" }
+    ),
 });
 
 const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
