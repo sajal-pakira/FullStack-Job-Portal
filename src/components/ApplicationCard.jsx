@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Boxes, BriefcaseBusiness, Download, School } from "lucide-react";
+import useFetch from "@/hooks/useFetch";
+import { updateApplicationStatus } from "@/api/apiApplications";
 
 const ApplicationCard = ({ application, isCandidate = false }) => {
   const handleDownload = () => {
@@ -15,6 +17,11 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
     link.target = "_blank";
     link.click();
   };
+
+  const { fn: fnHiringStatus, loading: loadingApplicationStatus } = useFetch(
+    updateApplicationStatus,
+    { job_id: application.job_id }
+  );
 
   return (
     <Card>
