@@ -118,6 +118,7 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             type="file"
             accept=".pdf, .doc, .docx"
             className="flex-1 file:text-gray-500"
+            {...register("resume")}
           />
 
           <Button variant="blue" size="lg" type="submit">
