@@ -20,7 +20,7 @@ import { applyToJob } from "@/api/apiApplications";
 import { BarLoader } from "react-spinners";
 
 const schema = z.object({
-  exprerience: z
+  experience: z
     .number()
     .min(0, { message: "Experience must be at least 0" })
     .int(),
@@ -97,7 +97,7 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             type="number"
             placeholder="Years of Experience"
             className="flex-1"
-            {...register("exprerience", { valueAsNumber: true })}
+            {...register("experience", { valueAsNumber: true })}
           />
 
           {errors.exprerience && (
