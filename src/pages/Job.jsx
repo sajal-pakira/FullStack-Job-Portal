@@ -123,7 +123,7 @@ const Job = () => {
       )}
 
       {job?.applications?.length > 0 && job?.recruiter_id === user?.id && (
-        <div>
+        <div className="flex flex-col gap-2">
           <h2 className="text-2xl sm:text-3xl font-bold">Application</h2>
           {job?.applications.map((application) => {
             return (
