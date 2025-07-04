@@ -146,6 +146,9 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
           {errors.resume && (
             <p className="text-red-500">{errors.resume.message}</p>
           )}
+          {errorApply?.message && (
+            <p className="text-red-500">{errorApply?.message}</p>
+          )}
 
           <Button variant="blue" size="lg" type="submit">
             Apply
