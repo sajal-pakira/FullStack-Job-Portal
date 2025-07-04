@@ -31,13 +31,27 @@ export async function applyToJob(token, _, jobData) {
       ])
       .select();
     if (error) {
-       console.log("Error in submitting application:", error);
+      console.log("Error in submitting application:", error);
       return { success: false, error: "Application submission failed" };
     }
 
-     return { success: true, data };
+    return { success: true, data };
   } catch (err) {
-     console.log("ERROR", err);
+    console.log("ERROR", err);
     return { success: false, error: "Unexpected error occurred" };
   }
+}
+
+export async function updateApplications(token, { job_id }, status) {
+  const supabase = await supabaseClient(token);
+  const { data, error } = await supabase
+    .from("applications")
+    .update({ status })
+    .eq("job_id", job_id)
+    .select();
+  if (error || data.length === 0) {
+    console.log("Error in updating applications status", error);
+    return null;
+  }
+  return data;
 }
