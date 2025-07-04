@@ -15,6 +15,7 @@ import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { P } from "@clerk/clerk-react/dist/useAuth-CbDfW7Rs";
 
 const schema = z.object({
   exprerience: z
@@ -110,6 +111,9 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             )}
           />
 
+          {errors.education && (
+            <p className="text-red-500">{errors.education.message}</p>
+          )}
           <Input
             type="file"
             accept=".pdf, .doc, .docx"
