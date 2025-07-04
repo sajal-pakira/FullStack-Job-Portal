@@ -55,6 +55,17 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
     error: errorApply,
   } = useFetch(applyToJob);
 
+  const onSubmit = (data) => {
+    fnApply({
+      ...data,
+      job_id: job.id,
+      candidate_id: user.id,
+      name: user.fullName,
+      status: "applied",
+      resume: data.resume[0],
+    });
+  };
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -74,7 +85,10 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
           <DrawerDescription>Please fill the form below</DrawerDescription>
         </DrawerHeader>
 
-        <form className="flex flex-col gap-4 pb-0 p-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 pb-0 p-4"
+        >
           <Input
             type="number"
             placeholder="Years of Experience"
