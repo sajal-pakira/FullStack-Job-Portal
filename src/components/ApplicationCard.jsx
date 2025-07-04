@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Download } from "lucide-react";
+import { BriefcaseBusiness, Download } from "lucide-react";
 
 const ApplicationCard = ({ application, isCandidate = false }) => {
   const handleDownload = () => {
@@ -26,7 +26,10 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
       </CardHeader>
       <CardContent>
         <div>
-          <div>{application?.experience} years of experience</div>
+          <div className="flex gap-2 items-center">
+            <BriefcaseBusiness size={15} /> {application?.experience} years of
+            experience
+          </div>
         </div>
       </CardContent>
     </Card>
