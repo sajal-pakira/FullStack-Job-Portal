@@ -45,8 +45,15 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
         </div>
         <hr />
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex justify-between">
         <span>{new Date(application?.created_at).toLocaleString()}</span>
+        {!isCandidate ? (
+          <span className="capitalize font-bold">
+            Status: {application?.status}
+          </span>
+        ) : (
+          <></>
+        )}
       </CardFooter>
     </Card>
   );
