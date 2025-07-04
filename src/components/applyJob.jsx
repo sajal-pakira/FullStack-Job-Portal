@@ -17,6 +17,7 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useFetch from "@/hooks/useFetch";
 import { applyToJob } from "@/api/apiApplications";
+import { BarLoader } from "react-spinners";
 
 const schema = z.object({
   exprerience: z
@@ -149,6 +150,8 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
           {errorApply?.message && (
             <p className="text-red-500">{errorApply?.message}</p>
           )}
+
+          {loadingApply && <BarLoader color="#36d7b7" width={"100%"} />}
 
           <Button variant="blue" size="lg" type="submit">
             Apply
