@@ -1,6 +1,12 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { BriefcaseBusiness, Download } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Boxes, BriefcaseBusiness, Download, School } from "lucide-react";
 
 const ApplicationCard = ({ application, isCandidate = false }) => {
   const handleDownload = () => {
@@ -24,14 +30,24 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
           />
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div>
+      <CardContent className="flex flex-col gap-4 flex-1">
+        <div className="flex flex-col md:flex-row justify-between">
           <div className="flex gap-2 items-center">
             <BriefcaseBusiness size={15} /> {application?.experience} years of
             experience
           </div>
+          <div className="flex gap-2 items-center">
+            <School size={15} /> {application?.education}
+          </div>
+          <div className="flex gap-2 items-center">
+            <Boxes size={15} /> skills: {application?.skills}
+          </div>
         </div>
+        <hr />
       </CardContent>
+      <CardFooter>
+        <span>{new Date(application?.created_at).toLocaleString()}</span>
+      </CardFooter>
     </Card>
   );
 };
