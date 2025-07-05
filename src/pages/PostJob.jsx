@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const schema = z.object({
-  title: z.string.min(1, { message: "Title is required" }),
-  description: z.string.min(1, { message: "Description is required" }),
-  location: z.string.min(1, { message: "Location is required" }),
-  company_id: z.string.min(1, { message: "Select or Add a new company" }),
-  requirements: z.string.min(1, { message: "requirements are required" }),
+  title: z.string().min(1, { message: "Title is required" }),
+  description: z.string().min(1, { message: "Description is required" }),
+  location: z.string().min(1, { message: "Location is required" }),
+  company_id: z.string().min(1, { message: "Select or Add a new company" }),
+  requirements: z.string().min(1, { message: "requirements are required" }),
 });
 
 const PostJob = () => {
@@ -27,7 +27,9 @@ const PostJob = () => {
   });
   return (
     <div>
-      <h1>Post a Job</h1>
+      <h1 className="gradient-title font font-extrabold text-5xl sm:text-7xl text text-center pb-8">
+        Post a Job
+      </h1>
     </div>
   );
 };
