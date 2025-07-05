@@ -9,6 +9,7 @@ import {
 import { Boxes, BriefcaseBusiness, Download, School } from "lucide-react";
 import useFetch from "@/hooks/useFetch";
 import { updateApplicationStatus } from "@/api/apiApplications";
+import { BarLoader } from "react-spinners";
 
 const ApplicationCard = ({ application, isCandidate = false }) => {
   const handleDownload = () => {
@@ -18,13 +19,14 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
     link.click();
   };
 
-  const { fn: fnHiringStatus, loading: loadingApplicationStatus } = useFetch(
+  const { fn: fnHiringStatus, loading: loadingHiringStatus } = useFetch(
     updateApplicationStatus,
     { job_id: application.job_id }
   );
 
   return (
     <Card>
+      {loadingHiringStatus && <BarLoader width={"100%"} color="#36d7b7" />}
       <CardHeader>
         <CardTitle className="flex justify-between font-bold">
           {isCandidate
