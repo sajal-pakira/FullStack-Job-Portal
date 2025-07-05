@@ -6,9 +6,13 @@ export async function applyToJob(token, _, jobData) {
 
     const supabase = await supabaseClient(token);
 
+    // await supabaseClient.auth.setSession({
+    //   access_token: token,
+    //   refresh_token: "",
+    // });
     const random = Math.floor(Math.random() * 90000);
     const fileName = `resume-${random}-${jobData.candidate_id}`;
-    const { error: storageError } = await supabase.storage
+    const { error: storageError } = await supabaseClient.storage
       .from("resumes")
       .upload(fileName, jobData.resume, {
         contentType: jobData.resume.type || "application/pdf",
@@ -42,15 +46,39 @@ export async function applyToJob(token, _, jobData) {
   }
 }
 
-export async function updateApplicationStatus(token, { job_id }, status) {
+export async function updateApplicationStatus(
+  token,
+  { job_id, candidate_id },
+  status
+) {
   const supabase = await supabaseClient(token);
+
+  // await supabaseClient.auth.setSession({
+  //   access_token: token,
+  //   refresh_token: "",
+  // });
+
+  //debug
+  // const debug = await supabaseClient
+  //   .from("applications")
+  //   .select("*")
+  //   .eq("job_id", job_id)
+  //   .eq("candidate_id", candidate_id);
+
+  // console.log("DEBUG - matching row:", debug);
+
   const { data, error } = await supabase
     .from("applications")
     .update({ status })
     .eq("job_id", job_id)
+    .eq("candidate_id", candidate_id)
     .select();
-  if (error || data.length === 0) {
-    console.log("Error in updating applications status", error);
+  if (error || !data || data.length === 0) {
+    //
+    console.log("Error in updating applications status :- ", error);
+    console.log("❌ Update failed");
+
+    console.log("Data:", data);
     return null;
   }
   return data;

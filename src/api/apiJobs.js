@@ -3,6 +3,12 @@ import supabaseClient from "@/utils/supabase";
 // Fetch Jobs
 export async function getJobs(token, { location, company_id, searchQuery }) {
   const supabase = await supabaseClient(token);
+
+  // await supabaseClient.auth.setSession({
+  //   access_token: token,
+  //   refresh_token: "", // or null if not available
+  // });
+
   let query = supabase
     .from("jobs")
     .select("*, saved: saved_jobs(id), company: companies(name,logo_url)");
@@ -32,6 +38,12 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
 // Read Saved Jobs
 export async function getSavedJobs(token) {
   const supabase = await supabaseClient(token);
+
+  // await supabaseClient.auth.setSession({
+  //   access_token: token,
+  //   refresh_token: "", // or null if not available
+  // });
+
   const { data, error } = await supabase
     .from("saved_jobs")
     .select("*, job: jobs(*, company: companies(name,logo_url))");
@@ -47,6 +59,12 @@ export async function getSavedJobs(token) {
 // Read single job
 export async function getSingleJob(token, { job_id }) {
   const supabase = await supabaseClient(token);
+
+  // await supabaseClient.auth.setSession({
+  //   access_token: token,
+  //   refresh_token: "", // or null if not available
+  // });
+
   let query = supabase
     .from("jobs")
     .select(
@@ -68,6 +86,11 @@ export async function getSingleJob(token, { job_id }) {
 // - Add / Remove Saved Job
 export async function saveJob(token, { alreadySaved }, saveData) {
   const supabase = await supabaseClient(token);
+
+  // await supabaseClient.auth.setSession({
+  //   access_token: token,
+  //   refresh_token: "", // or null if not available
+  // });
 
   if (alreadySaved) {
     // If the job is already saved, remove it
@@ -101,6 +124,12 @@ export async function saveJob(token, { alreadySaved }, saveData) {
 // - job isOpen toggle - (recruiter_id = auth.uid())
 export async function updateHiringStatus(token, { job_id }, isOpen) {
   const supabase = await supabaseClient(token);
+
+  // await supabaseClient.auth.setSession({
+  //   access_token: token,
+  //   refresh_token: "", // or null if not available
+  // });
+
   const { data, error } = await supabase
     .from("jobs")
     .update({ isOpen })
