@@ -151,6 +151,12 @@ const PostJob = () => {
 
           {/* add company drawer */}
         </div>
+        {errors.location && (
+          <p className="text-red-500">{errors.location.message}</p>
+        )}
+        {errors.company_id && (
+          <p className="text-red-500">{errors.company_id.message}</p>
+        )}
       </form>
     </div>
   );
