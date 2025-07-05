@@ -1,8 +1,21 @@
+import { getCompanies } from "@/api/apiCompanies";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import useFetch from "@/hooks/useFetch";
+import { useUser } from "@clerk/clerk-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import { State } from "country-state-city";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { BarLoader } from "react-spinners";
 import { z } from "zod";
 
 const schema = z.object({
@@ -14,6 +27,8 @@ const schema = z.object({
 });
 
 const PostJob = () => {
+  const { isLoaded, user } = useUser();
+
   const {
     register,
     control,
@@ -27,6 +42,21 @@ const PostJob = () => {
     },
     resolver: zodResolver(schema),
   });
+
+  const {
+    fn: fnCompanies,
+    data: companies,
+    loading: loadingCompanies,
+  } = useFetch(getCompanies);
+
+  useEffect(() => {
+    if (isLoaded) fnCompanies();
+  }, [isLoaded]);
+
+  if (!isLoaded || loadingCompanies) {
+    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+  }
+
   return (
     <div>
       <h1 className="gradient-title font font-extrabold text-5xl sm:text-7xl text text-center pb-8">
@@ -42,6 +72,26 @@ const PostJob = () => {
         {errors?.description && (
           <p className="text-red-500">{errors?.description?.message}</p>
         )}
+
+        <Select
+        // value={location}
+        // onValueChange={(value) => setLocation(value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Filter by Location" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {State.getStatesOfCountry("IN").map((state) => {
+                return (
+                  <SelectItem key={state.isoCode} value={state.name}>
+                    {state.name}
+                  </SelectItem>
+                );
+              })}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </form>
     </div>
   );
