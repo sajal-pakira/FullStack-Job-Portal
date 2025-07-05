@@ -67,63 +67,81 @@ const PostJob = () => {
       <h1 className="gradient-title font font-extrabold text-5xl sm:text-7xl text text-center pb-8">
         Post a Job
       </h1>
-      <form>
-        <Input placeholder="Job Title" {...register("title")} />
+      <form className="flex flex-col gap-4 p-4 pb-0 ">
+        <Input
+          className="bg-black"
+          placeholder="Job Title"
+          {...register("title")}
+        />
         {errors?.title && (
           <p className="text-red-500">{errors?.title?.message}</p>
         )}
+
+        <Textarea
+          className="bg-black"
+          placeholder="Job Description"
+          {...register("description")}
+        />
+        {errors?.description && (
+          <p className="text-red-500">{errors?.description?.message}</p>
+        )}
+
+        <div className="flex flex-col sm:flex-row gap-4 items-center ">
+          <Select
+          // value={location}
+          // onValueChange={(value) => setLocation(value)}
+          >
+            <SelectTrigger className="bg-black">
+              <SelectValue placeholder="Filter by Location" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {State.getStatesOfCountry("IN").map((state) => {
+                  return (
+                    <SelectItem
+                      className="bg-black"
+                      key={state.isoCode}
+                      value={state.name}
+                    >
+                      {state.name}
+                    </SelectItem>
+                  );
+                })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Select
+          // value={company_id}
+          // onValueChange={(value) => setCompany_id(value)}
+          // disabled={loadingCompanies}
+          >
+            <SelectTrigger className="bg-black">
+              <SelectValue
+                placeholder={
+                  loadingCompanies
+                    ? "Loading companies..."
+                    : "Filter by Company"
+                }
+              />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {companies?.map((company) => {
+                  return (
+                    <SelectItem
+                      className="bg-black"
+                      key={company.id}
+                      value={company.id}
+                    >
+                      {company.name}
+                    </SelectItem>
+                  );
+                })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </form>
-
-      <Textarea placeholder="Job Description" {...register("description")} />
-      {errors?.description && (
-        <p className="text-red-500">{errors?.description?.message}</p>
-      )}
-
-      <div className="flex flex-col sm:flex-row gap-4 items-center">
-        <Select
-        // value={location}
-        // onValueChange={(value) => setLocation(value)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Filter by Location" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {State.getStatesOfCountry("IN").map((state) => {
-                return (
-                  <SelectItem key={state.isoCode} value={state.name}>
-                    {state.name}
-                  </SelectItem>
-                );
-              })}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <Select
-        // value={company_id}
-        // onValueChange={(value) => setCompany_id(value)}
-        // disabled={loadingCompanies}
-        >
-          <SelectTrigger>
-            <SelectValue
-              placeholder={
-                loadingCompanies ? "Loading companies..." : "Filter by Company"
-              }
-            />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {companies?.map((company) => {
-                return (
-                  <SelectItem key={company.id} value={company.id}>
-                    {company.name}
-                  </SelectItem>
-                );
-              })}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
     </div>
   );
 };
