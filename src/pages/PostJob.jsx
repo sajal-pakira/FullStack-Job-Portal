@@ -72,27 +72,51 @@ const PostJob = () => {
         {errors?.description && (
           <p className="text-red-500">{errors?.description?.message}</p>
         )}
-
-        <Select
-        // value={location}
-        // onValueChange={(value) => setLocation(value)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Filter by Location" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {State.getStatesOfCountry("IN").map((state) => {
-                return (
-                  <SelectItem key={state.isoCode} value={state.name}>
-                    {state.name}
-                  </SelectItem>
-                );
-              })}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
       </form>
+
+      <Select
+      // value={location}
+      // onValueChange={(value) => setLocation(value)}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Filter by Location" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {State.getStatesOfCountry("IN").map((state) => {
+              return (
+                <SelectItem key={state.isoCode} value={state.name}>
+                  {state.name}
+                </SelectItem>
+              );
+            })}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <Select
+      // value={company_id}
+      // onValueChange={(value) => setCompany_id(value)}
+      // disabled={loadingCompanies}
+      >
+        <SelectTrigger>
+          <SelectValue
+            placeholder={
+              loadingCompanies ? "Loading companies..." : "Filter by Company"
+            }
+          />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {companies?.map((company) => {
+              return (
+                <SelectItem key={company.id} value={company.id}>
+                  {company.name}
+                </SelectItem>
+              );
+            })}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
   );
 };
