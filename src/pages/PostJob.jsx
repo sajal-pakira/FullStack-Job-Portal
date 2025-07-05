@@ -14,7 +14,7 @@ import { useUser } from "@clerk/clerk-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { State } from "country-state-city";
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { z } from "zod";
@@ -87,59 +87,69 @@ const PostJob = () => {
         )}
 
         <div className="flex flex-col sm:flex-row gap-4 items-center ">
-          <Select
-          // value={location}
-          // onValueChange={(value) => setLocation(value)}
-          >
-            <SelectTrigger className="bg-black">
-              <SelectValue placeholder="Filter by Location" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {State.getStatesOfCountry("IN").map((state) => {
-                  return (
-                    <SelectItem
-                      className="bg-black"
-                      key={state.isoCode}
-                      value={state.name}
-                    >
-                      {state.name}
-                    </SelectItem>
-                  );
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select
-          // value={company_id}
-          // onValueChange={(value) => setCompany_id(value)}
-          // disabled={loadingCompanies}
-          >
-            <SelectTrigger className="bg-black">
-              <SelectValue
-                placeholder={
-                  loadingCompanies
-                    ? "Loading companies..."
-                    : "Filter by Company"
-                }
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {companies?.map((company) => {
-                  return (
-                    <SelectItem
-                      className="bg-black"
-                      key={company.id}
-                      value={company.id}
-                    >
-                      {company.name}
-                    </SelectItem>
-                  );
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <Controller
+            name="location"
+            control={control}
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger className="bg-black">
+                  <SelectValue placeholder="Filter by Location" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {State.getStatesOfCountry("IN").map((state) => {
+                      return (
+                        <SelectItem
+                          className="bg-black"
+                          key={state.isoCode}
+                          value={state.name}
+                        >
+                          {state.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          <Controller
+            name="company_id"
+            control={control}
+            render={({ field }) => (
+              <Select
+                value={field.value}
+                onValueChange={field.onChange}
+                // disabled={loadingCompanies}
+              >
+                <SelectTrigger className="bg-black">
+                  <SelectValue placeholder="Filter by Company">
+                    {field.value
+                      ? companies?.find((com) => com.id === Number(field.value))
+                          ?.name
+                      : "Company"}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {companies?.map((company) => {
+                      return (
+                        <SelectItem
+                          className="bg-black"
+                          key={company.name}
+                          value={company.id}
+                        >
+                          {company.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
+
+          {/* add company drawer */}
         </div>
       </form>
     </div>
