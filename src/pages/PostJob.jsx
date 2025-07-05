@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { State } from "country-state-city";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Navigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { z } from "zod";
 
@@ -55,6 +56,10 @@ const PostJob = () => {
 
   if (!isLoaded || loadingCompanies) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+  }
+
+  if (user?.unsafeMetadata?.role !== "recruiter") {
+    return <Navigate to="/jobs" />;
   }
 
   return (
