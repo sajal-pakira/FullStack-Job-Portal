@@ -1,4 +1,5 @@
 import { getCompanies } from "@/api/apiCompanies";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -12,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import MDEditor from "@uiw/react-md-editor";
 import { State } from "country-state-city";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -157,6 +159,23 @@ const PostJob = () => {
         {errors.company_id && (
           <p className="text-red-500">{errors.company_id.message}</p>
         )}
+        <Controller
+          name="recuirements"
+          control={control}
+          render={({ field }) => (
+            <MDEditor
+              className="bg-black"
+              value={field.value}
+              onChange={field.onChange}
+            />
+          )}
+        />
+        {errors.requirements && (
+          <p className="text-red-500">{errors.requirements.message}</p>
+        )}
+        <Button type="submit" variant="blue" size="lg" className="mt-2">
+          Submit
+        </Button>
       </form>
     </div>
   );
