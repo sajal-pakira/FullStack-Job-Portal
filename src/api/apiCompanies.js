@@ -2,7 +2,7 @@ import supabaseClient from "@/utils/supabase";
 
 export async function getCompanies(token) {
   try {
-    const supabase = await supabaseClient(token);
+    const supabase = supabaseClient(token);
 
     // await supabaseClient.auth.setSession({
     //   access_token: token,
