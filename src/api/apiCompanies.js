@@ -1,4 +1,4 @@
-import supabaseClient from "@/utils/supabase";
+import supabaseClient, { supabaseUrl } from "@/utils/supabase";
 
 export async function getCompanies(token) {
   try {
@@ -31,9 +31,17 @@ export async function addNewCompany(token, _, companyData) {
       return { error: "Resume upload failed" };
     }
 
-    const resume = `${supabaseUrl}/storage/v1/object/public/company-logo/${fileName}`;
+    const logo_url = `${supabaseUrl}/storage/v1/object/public/company-logo/${fileName}`;
 
-    const { data, error } = await supabase.from("companies").select("*");
+    const { data, error } = await supabase
+      .from("companies")
+      .insert([
+        {
+          name: companyData.name,
+          logo_url,
+        },
+      ])
+      .select("*");
     if (error) {
       console.log("Error in fetching the companies", error);
       return [];
