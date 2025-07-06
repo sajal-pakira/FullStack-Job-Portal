@@ -7,9 +7,8 @@ const schema = z.object({
     .refine(
       (file) =>
         file[0] &&
-        (file[0].type === "application/pdf" ||
-          file[0].type === "application/msword"),
-      { message: "Only PDF or Word Documents are allowed" }
+        (file[0].type === "image/png" || file[0].type === "image/jpeg"),
+      { message: "Only png or jpeg are allowed" }
     ),
 });
 
