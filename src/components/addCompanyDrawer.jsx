@@ -1,3 +1,13 @@
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,7 +33,23 @@ const AddCompanyDrawer = (fetchCompanies) => {
     resolver: zodResolver(schema),
   });
 
-  return <div>AddCompanyDrawer</div>;
+  return (
+    <Drawer>
+      <DrawerTrigger></DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle></DrawerTitle>
+          <DrawerDescription></DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button></Button>
+          <DrawerClose>
+            <Button variant="outline"></Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
 };
 
 export default AddCompanyDrawer;
