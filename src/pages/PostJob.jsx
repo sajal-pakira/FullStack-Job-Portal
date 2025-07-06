@@ -1,5 +1,6 @@
 import { getCompanies } from "@/api/apiCompanies";
 import { addNewJob } from "@/api/apiJobs";
+import AddCompanyDrawer from "@/components/addCompanyDrawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -78,7 +79,7 @@ const PostJob = () => {
 
   useEffect(() => {
     if (dataCreateJob?.length > 0) navigate("/jobs");
-  },[loadingCreateJob]);
+  }, [loadingCreateJob]);
 
   if (!isLoaded || loadingCompanies) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
@@ -179,6 +180,7 @@ const PostJob = () => {
           />
 
           {/* add company drawer */}
+          <AddCompanyDrawer fetchCompanies={fnCompanies} />
         </div>
         {errors?.location && (
           <p className="text-red-500">{errors?.location?.message}</p>
