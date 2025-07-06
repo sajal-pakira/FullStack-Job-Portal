@@ -180,22 +180,58 @@ export async function deleteJob(token, { job_id }) {
 }
 
 // - post job
+// export async function addNewJob(token, _, jobData) {
+//   const supabase = supabaseClient(token);
+
+//   console.log("🧾 jobData received:", jobData);
+//   console.log("✅ typeof jobData:", typeof jobData);
+//   console.log("✅ isArray:", Array.isArray(jobData));
+
+//   const parsedJobData = JSON.parse(jobData);
+
+//   const { data, error } = await supabase
+//     .from("jobs")
+//     .insert([parsedJobData])
+//     .select();
+
+//   if (error) {
+//     console.error("❌ Supabase insert error:", error);
+//   }
+
+//   return data;
+// }
+
 export async function addNewJob(token, _, jobData) {
-  console.log("🧾 jobData received:", jobData);
   const supabase = supabaseClient(token);
 
-  console.log("🧾 jobData received:", jobData);
+  console.log("🧾 jobData received (string):", jobData);
   console.log("✅ typeof jobData:", typeof jobData);
-  console.log("✅ isArray:", Array.isArray(jobData));
+
+  let parsedJobData;
+
+  try {
+    parsedJobData = JSON.parse(jobData);
+  } catch (err) {
+    console.error("❌ JSON parse error:", err.message);
+    return null;
+  }
+
+  console.log("🧾 parsedJobData:", parsedJobData);
+  console.log("✅ parsedJobData isArray:", Array.isArray(parsedJobData));
+  console.log("✅ parsedJobData typeof:", typeof parsedJobData);
 
   const { data, error } = await supabase
     .from("jobs")
-    .insert([jobData])
+    .insert(
+      Array.isArray(parsedJobData)
+        ? parsedJobData // if it's already array of objects
+        : [parsedJobData] // if it's just one object
+    )
     .select();
 
   if (error) {
-    console.error(error);
-    throw new Error("Error Creating Job");
+    console.error("❌ Supabase insert error:", error);
+    return null;
   }
 
   return data;

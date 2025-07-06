@@ -68,8 +68,7 @@ const PostJob = () => {
   } = useFetch(addNewJob);
 
   const onSubmit = async (data) => {
-    const token = await getToken();
-    fnCreateJob(token, null, {
+    fnCreateJob(null, {
       ...data,
       company_id: Number(data.company_id),
       recruiter_id: user.id,
