@@ -11,6 +11,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Button } from "./ui/button";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Company name is required" }),
@@ -24,7 +25,7 @@ const schema = z.object({
     ),
 });
 
-const AddCompanyDrawer = (fetchCompanies) => {
+const AddCompanyDrawer = ({ fetchCompanies }) => {
   const {
     register,
     handleSubmit,
@@ -35,11 +36,14 @@ const AddCompanyDrawer = (fetchCompanies) => {
 
   return (
     <Drawer>
-      <DrawerTrigger></DrawerTrigger>
+      <DrawerTrigger>
+        <Button type="button" size="sm" variant="secondary">
+          Add Company
+        </Button>
+      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle></DrawerTitle>
-          <DrawerDescription></DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
           <Button></Button>
