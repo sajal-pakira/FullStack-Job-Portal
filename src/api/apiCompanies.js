@@ -15,3 +15,32 @@ export async function getCompanies(token) {
     return [];
   }
 }
+
+export async function addNewCompany(token, _, companyData) {
+  try {
+    const supabase = supabaseClient(token);
+
+    const random = Math.floor(Math.random() * 90000);
+    const fileName = `resume-${random}-${companyData.name}`;
+    const { error: storageError } = await supabaseClient.storage
+      .from("company-logo")
+      .upload(fileName, companyData.logo);
+
+    if (storageError) {
+      console.log("Error uploading company logo", storageError);
+      return { error: "Resume upload failed" };
+    }
+
+    const resume = `${supabaseUrl}/storage/v1/object/public/company-logo/${fileName}`;
+
+    const { data, error } = await supabase.from("companies").select("*");
+    if (error) {
+      console.log("Error in fetching the companies", error);
+      return [];
+    }
+    return data;
+  } catch (error) {
+    console.log("ERROR", error);
+    return [];
+  }
+}
