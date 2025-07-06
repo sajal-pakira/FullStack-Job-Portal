@@ -181,7 +181,12 @@ export async function deleteJob(token, { job_id }) {
 
 // - post job
 export async function addNewJob(token, _, jobData) {
-  const supabase = await supabaseClient(token);
+  console.log("🧾 jobData received:", jobData);
+  const supabase = supabaseClient(token);
+
+  console.log("🧾 jobData received:", jobData);
+  console.log("✅ typeof jobData:", typeof jobData);
+  console.log("✅ isArray:", Array.isArray(jobData));
 
   const { data, error } = await supabase
     .from("jobs")

@@ -12,13 +12,14 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import useFetch from "@/hooks/useFetch";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MDEditor from "@uiw/react-md-editor";
 import { State } from "country-state-city";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import { BarLoader } from "react-spinners";
 import { z } from "zod";
 
@@ -32,6 +33,8 @@ const schema = z.object({
 
 const PostJob = () => {
   const { isLoaded, user } = useUser();
+  const { getToken } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -64,13 +67,19 @@ const PostJob = () => {
     error: errorCreateJob,
   } = useFetch(addNewJob);
 
-  const onSubmit = (data) => {
-    fnCreateJob({
+  const onSubmit = async (data) => {
+    const token = await getToken();
+    fnCreateJob(token, null, {
       ...data,
+      company_id: Number(data.company_id),
       recruiter_id: user.id,
       isOpen: true,
     });
   };
+
+  useEffect(() => {
+    if (dataCreateJob?.length > 0) navigate("/jobs");
+  });
 
   if (!isLoaded || loadingCompanies) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
@@ -114,7 +123,7 @@ const PostJob = () => {
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger className="bg-black">
-                  <SelectValue placeholder="Filter by Location" />
+                  <SelectValue placeholder="Choose by Location" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -144,7 +153,7 @@ const PostJob = () => {
                 // disabled={loadingCompanies}
               >
                 <SelectTrigger className="bg-black">
-                  <SelectValue placeholder="Filter by Company">
+                  <SelectValue placeholder="Choose Company">
                     {field.value
                       ? companies?.find((com) => com.id === Number(field.value))
                           ?.name
@@ -172,14 +181,14 @@ const PostJob = () => {
 
           {/* add company drawer */}
         </div>
-        {errors.location && (
-          <p className="text-red-500">{errors.location.message}</p>
+        {errors?.location && (
+          <p className="text-red-500">{errors?.location?.message}</p>
         )}
-        {errors.company_id && (
-          <p className="text-red-500">{errors.company_id.message}</p>
+        {errors?.company_id && (
+          <p className="text-red-500">{errors?.company_id?.message}</p>
         )}
         <Controller
-          name="recuirements"
+          name="requirements"
           control={control}
           render={({ field }) => (
             <MDEditor
@@ -189,8 +198,8 @@ const PostJob = () => {
             />
           )}
         />
-        {errors.requirements && (
-          <p className="text-red-500">{errors.requirements.message}</p>
+        {errors?.requirements && (
+          <p className="text-red-500">{errors?.requirements?.message}</p>
         )}
         {errorCreateJob?.message && (
           <p className="text-red-500">{errorCreateJob?.message}</p>
