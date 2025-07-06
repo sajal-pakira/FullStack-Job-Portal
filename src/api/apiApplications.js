@@ -4,12 +4,8 @@ export async function applyToJob(token, _, jobData) {
   try {
     console.log("Upload token:", token);
 
-    const supabase = await supabaseClient(token);
+    const supabase = supabaseClient(token);
 
-    // await supabaseClient.auth.setSession({
-    //   access_token: token,
-    //   refresh_token: "",
-    // });
     const random = Math.floor(Math.random() * 90000);
     const fileName = `resume-${random}-${jobData.candidate_id}`;
     const { error: storageError } = await supabaseClient.storage
@@ -51,21 +47,7 @@ export async function updateApplicationStatus(
   { job_id, candidate_id },
   status
 ) {
-  const supabase = await supabaseClient(token);
-
-  // await supabaseClient.auth.setSession({
-  //   access_token: token,
-  //   refresh_token: "",
-  // });
-
-  //debug
-  // const debug = await supabaseClient
-  //   .from("applications")
-  //   .select("*")
-  //   .eq("job_id", job_id)
-  //   .eq("candidate_id", candidate_id);
-
-  // console.log("DEBUG - matching row:", debug);
+  const supabase = supabaseClient(token);
 
   const { data, error } = await supabase
     .from("applications")

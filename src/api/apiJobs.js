@@ -2,7 +2,7 @@ import supabaseClient from "@/utils/supabase";
 
 // Fetch Jobs
 export async function getJobs(token, { location, company_id, searchQuery }) {
-  const supabase = await supabaseClient(token);
+  const supabase = supabaseClient(token);
 
   // await supabaseClient.auth.setSession({
   //   access_token: token,
@@ -37,7 +37,7 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
 
 // Read Saved Jobs
 export async function getSavedJobs(token) {
-  const supabase = await supabaseClient(token);
+  const supabase = supabaseClient(token);
 
   // await supabaseClient.auth.setSession({
   //   access_token: token,
@@ -58,7 +58,7 @@ export async function getSavedJobs(token) {
 
 // Read single job
 export async function getSingleJob(token, { job_id }) {
-  const supabase = await supabaseClient(token);
+  const supabase = supabaseClient(token);
 
   // await supabaseClient.auth.setSession({
   //   access_token: token,
@@ -85,7 +85,7 @@ export async function getSingleJob(token, { job_id }) {
 
 // - Add / Remove Saved Job
 export async function saveJob(token, { alreadySaved }, saveData) {
-  const supabase = await supabaseClient(token);
+  const supabase = supabaseClient(token);
 
   // await supabaseClient.auth.setSession({
   //   access_token: token,
@@ -123,7 +123,7 @@ export async function saveJob(token, { alreadySaved }, saveData) {
 
 // - job isOpen toggle - (recruiter_id = auth.uid())
 export async function updateHiringStatus(token, { job_id }, isOpen) {
-  const supabase = await supabaseClient(token);
+  const supabase = supabaseClient(token);
 
   // await supabaseClient.auth.setSession({
   //   access_token: token,
@@ -146,7 +146,7 @@ export async function updateHiringStatus(token, { job_id }, isOpen) {
 
 // get my created jobs
 export async function getMyJobs(token, { recruiter_id }) {
-  const supabase = await supabaseClient(token);
+  const supabase = supabaseClient(token);
 
   const { data, error } = await supabase
     .from("jobs")
@@ -163,7 +163,7 @@ export async function getMyJobs(token, { recruiter_id }) {
 
 // Delete job
 export async function deleteJob(token, { job_id }) {
-  const supabase = await supabaseClient(token);
+  const supabase = supabaseClient(token);
 
   const { data, error: deleteError } = await supabase
     .from("jobs")
@@ -180,41 +180,20 @@ export async function deleteJob(token, { job_id }) {
 }
 
 // - post job
-// export async function addNewJob(token, _, jobData) {
-//   const supabase = supabaseClient(token);
-
-//   console.log("🧾 jobData received:", jobData);
-//   console.log("✅ typeof jobData:", typeof jobData);
-//   console.log("✅ isArray:", Array.isArray(jobData));
-
-//   const parsedJobData = JSON.parse(jobData);
-
-//   const { data, error } = await supabase
-//     .from("jobs")
-//     .insert([parsedJobData])
-//     .select();
-
-//   if (error) {
-//     console.error("❌ Supabase insert error:", error);
-//   }
-
-//   return data;
-// }
-
 export async function addNewJob(token, _, jobData) {
   const supabase = supabaseClient(token);
 
-  console.log("🧾 jobData received:", jobData);
-  console.log("✅ typeof jobData:", typeof jobData);
-  console.log("✅ isArray:", Array.isArray(jobData));
+  // console.log("🧾 jobData received:", jobData);
+  // console.log("✅ typeof jobData:", typeof jobData);
+  // console.log("✅ isArray:", Array.isArray(jobData));
 
   const { data, error } = await supabase
     .from("jobs")
-    .insert([jobData]) // No JSON.parse needed anymore
+    .insert([jobData])
     .select();
 
   if (error) {
-    console.error("❌ Supabase insert error:", error);
+    console.error("❌ Supabase insert error:-", error);
   }
 
   return data;
