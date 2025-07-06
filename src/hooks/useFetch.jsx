@@ -16,7 +16,7 @@ const useFetch = (cb, options = {}) => {
       const supabaseAccessToken = await session.getToken({
         template: "GetHirrd",
       });
-      console.log("🔐 Supabase token:", supabaseAccessToken);
+      // console.log("🔐 Supabase token:", supabaseAccessToken);
 
       const response = await cb(supabaseAccessToken, options, ...args);
       setData(response);
