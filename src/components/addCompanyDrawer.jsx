@@ -48,7 +48,7 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
           <DrawerTitle>Add a new company</DrawerTitle>
         </DrawerHeader>
 
-        <form className="flex flex-col items-center sm:flex-row gap-2 p-4 pb-0">
+        <form className="flex flex-col items-center justify-between sm:flex-row gap-2 p-4 pb-0">
           <Input placeholder="Company name" {...register("name")} />
           <Input
             type="file"
@@ -57,11 +57,10 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
             {...register("logo")}
           />
           <Button
-            width={"100%"}
             type="button"
             onClick={handleSubmit(onSubmit)}
             variant="destructive"
-            className="w-40"
+            className="w-full"
           >
             Add
           </Button>
