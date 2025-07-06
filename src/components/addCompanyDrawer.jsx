@@ -15,6 +15,7 @@ import { Input } from "./ui/input";
 import useFetch from "@/hooks/useFetch";
 import { addNewCompany } from "@/api/apiCompanies";
 import { BarLoader } from "react-spinners";
+import { useEffect } from "react";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Company name is required" }),
@@ -49,6 +50,10 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
       logo: data.logo[0],
     });
   };
+
+  useEffect(() => {
+    if (dataAddCompany?.length > 0) fetchCompanies();
+  }, [loadingAddCompany]);
 
   return (
     <Drawer>
