@@ -12,13 +12,13 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import useFetch from "@/hooks/useFetch";
-import { useUser, useAuth } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MDEditor from "@uiw/react-md-editor";
 import { State } from "country-state-city";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { BarLoader } from "react-spinners";
 import { z } from "zod";
@@ -33,7 +33,7 @@ const schema = z.object({
 
 const PostJob = () => {
   const { isLoaded, user } = useUser();
-  const { getToken } = useAuth();
+  // const { getToken } = useAuth();
   const navigate = useNavigate();
 
   const {
