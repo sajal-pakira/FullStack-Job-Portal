@@ -192,6 +192,9 @@ const PostJob = () => {
         {errors.requirements && (
           <p className="text-red-500">{errors.requirements.message}</p>
         )}
+        {errorCreateJob?.message && (
+          <p className="text-red-500">{errorCreateJob?.message}</p>
+        )}
         {loadingCreateJob && <BarLoader width={"100%"} color="#36d7b7" />}
         <Button type="submit" variant="blue" size="lg" className="mt-2">
           Submit
