@@ -14,6 +14,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import useFetch from "@/hooks/useFetch";
 import { addNewCompany } from "@/api/apiCompanies";
+import { BarLoader } from "react-spinners";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Company name is required" }),
@@ -42,7 +43,12 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
     error: errorAddCompany,
   } = useFetch(addNewCompany);
 
-  const onSubmit = () => {};
+  const onSubmit = (data) => {
+    fnAddCompany({
+      ...data,
+      logo: data.logo[0],
+    });
+  };
 
   return (
     <Drawer>
@@ -79,6 +85,11 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
         {errors?.logo && (
           <p className="text-red-500">{errors?.logo?.message}</p>
         )}
+        {errorAddCompany?.message && (
+          <p className="text-red-500">{errorAddCompany?.message}</p>
+        )}
+
+        {loadingAddCompany && <BarLoader width={"100%"} color="#36d7b7" />}
 
         <DrawerFooter>
           <DrawerClose asChild>
