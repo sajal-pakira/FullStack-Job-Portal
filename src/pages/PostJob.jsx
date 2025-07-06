@@ -60,7 +60,7 @@ const PostJob = () => {
   const {
     fn: fnCreateJob,
     data: dataCreateJob,
-    loading: loaingCreateJob,
+    loading: loadingCreateJob,
     error: errorCreateJob,
   } = useFetch(addNewJob);
 
@@ -85,7 +85,10 @@ const PostJob = () => {
       <h1 className="gradient-title font font-extrabold text-5xl sm:text-7xl text text-center pb-8">
         Post a Job
       </h1>
-      <form className="flex flex-col gap-4 p-4 pb-0 ">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 p-4 pb-0 "
+      >
         <Input
           className="bg-black"
           placeholder="Job Title"
@@ -189,6 +192,7 @@ const PostJob = () => {
         {errors.requirements && (
           <p className="text-red-500">{errors.requirements.message}</p>
         )}
+        {loadingCreateJob && <BarLoader width={"100%"} color="#36d7b7" />}
         <Button type="submit" variant="blue" size="lg" className="mt-2">
           Submit
         </Button>
