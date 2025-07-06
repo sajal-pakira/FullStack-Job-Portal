@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import useFetch from "@/hooks/useFetch";
+import { addNewCompany } from "@/api/apiCompanies";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Company name is required" }),
@@ -33,6 +35,12 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
   } = useForm({
     resolver: zodResolver(schema),
   });
+  const {
+    fn: fnAddCompany,
+    data: dataAddCompany,
+    loading: loadingAddCompany,
+    error: errorAddCompany,
+  } = useFetch(addNewCompany);
 
   const onSubmit = () => {};
 
@@ -65,10 +73,18 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
             Add
           </Button>
         </form>
+        {errors?.name && (
+          <p className="text-red-500">{errors?.name?.message}</p>
+        )}
+        {errors?.logo && (
+          <p className="text-red-500">{errors?.logo?.message}</p>
+        )}
 
         <DrawerFooter>
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="secondary" type="button">
+              Cancel
+            </Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
