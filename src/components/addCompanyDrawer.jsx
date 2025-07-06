@@ -2,7 +2,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -12,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Company name is required" }),
@@ -43,8 +43,26 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle></DrawerTitle>
+          <DrawerTitle>Add a new company</DrawerTitle>
         </DrawerHeader>
+
+        <form>
+          <Input placeholder="Company name" {...register("name")} />
+          <Input
+            type="file"
+            accept="image/*"
+            className="file:text-gray-400"
+            {...register("logo")}
+          />
+          <Button
+            type="button"
+            onClick={handleSubmit(onSubmit)}
+            variant="destructive"
+          >
+            Add
+          </Button>
+        </form>
+
         <DrawerFooter>
           <Button></Button>
           <DrawerClose>
