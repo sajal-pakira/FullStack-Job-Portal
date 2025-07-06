@@ -1,4 +1,5 @@
 import { getCompanies } from "@/api/apiCompanies";
+import { addNewJob } from "@/api/apiJobs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -55,6 +56,21 @@ const PostJob = () => {
   useEffect(() => {
     if (isLoaded) fnCompanies();
   }, [isLoaded]);
+
+  const {
+    fn: fnCreateJob,
+    data: dataCreateJob,
+    loading: loaingCreateJob,
+    error: errorCreateJob,
+  } = useFetch(addNewJob);
+
+  const onSubmit = (data) => {
+    fnCreateJob({
+      ...data,
+      recruiter_id: user.id,
+      isOpen: true,
+    });
+  };
 
   if (!isLoaded || loadingCompanies) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
