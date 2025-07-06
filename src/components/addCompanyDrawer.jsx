@@ -1,3 +1,5 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const schema = z.object({
@@ -13,6 +15,14 @@ const schema = z.object({
 });
 
 const AddCompanyDrawer = (fetchCompanies) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
   return <div>AddCompanyDrawer</div>;
 };
 
