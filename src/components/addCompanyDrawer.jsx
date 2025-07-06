@@ -34,6 +34,8 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
     resolver: zodResolver(schema),
   });
 
+  const onSubmit = () => {};
+
   return (
     <Drawer>
       <DrawerTrigger>
@@ -46,7 +48,7 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
           <DrawerTitle>Add a new company</DrawerTitle>
         </DrawerHeader>
 
-        <form>
+        <form className="flex flex-col items-center sm:flex-row gap-2 p-4 pb-0">
           <Input placeholder="Company name" {...register("name")} />
           <Input
             type="file"
@@ -55,6 +57,7 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
             {...register("logo")}
           />
           <Button
+            width={"100%"}
             type="button"
             onClick={handleSubmit(onSubmit)}
             variant="destructive"
@@ -65,9 +68,8 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
         </form>
 
         <DrawerFooter>
-          <Button></Button>
-          <DrawerClose>
-            <Button variant="outline"></Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
