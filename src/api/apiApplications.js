@@ -8,7 +8,7 @@ export async function applyToJob(token, _, jobData) {
 
     const random = Math.floor(Math.random() * 90000);
     const fileName = `resume-${random}-${jobData.candidate_id}`;
-    const { error: storageError } = await supabaseClient.storage
+    const { error: storageError } = await supabase.storage
       .from("resumes")
       .upload(fileName, jobData.resume, {
         contentType: jobData.resume.type || "application/pdf",

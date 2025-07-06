@@ -22,7 +22,7 @@ export async function addNewCompany(token, _, companyData) {
 
     const random = Math.floor(Math.random() * 90000);
     const fileName = `resume-${random}-${companyData.name}`;
-    const { error: storageError } = await supabaseClient.storage
+    const { error: storageError } = await supabase.storage
       .from("company-logo")
       .upload(fileName, companyData.logo);
 
@@ -41,9 +41,9 @@ export async function addNewCompany(token, _, companyData) {
           logo_url,
         },
       ])
-      .select("*");
+      .select();
     if (error) {
-      console.log("Error in fetching the companies", error);
+      console.log("Error in submitting the companies", error);
       return [];
     }
     return data;
