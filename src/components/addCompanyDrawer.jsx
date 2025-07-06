@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Company name is required" }),
-  resume: z
+  logo: z
     .any()
     .refine(
       (file) =>
