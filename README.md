@@ -122,3 +122,11 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 
 ```
+
+## 🏃‍♂️ Run Locally
+
+```bash
+npm run dev
+```
+
+then visit: http://localhost:5173
