@@ -23,10 +23,14 @@ const JobCard = ({
   const [saved, setSaved] = useState(savedInit);
   const { user } = useUser();
 
-  const { loading: loadingDeleteJob, fn: fnDeleteJob } = useFetch(deleteJob, {
+  const { fn: fnDeleteJob, loading: loadingDeleteJob } = useFetch(deleteJob, {
     job_id: job.id,
   });
 
+  const handleDeleteJob = async () => {
+    await fnDeleteJob();
+    onJobAction();
+  };
   const {
     loading: loadingSavedJob,
     data: savedJob,
@@ -38,11 +42,6 @@ const JobCard = ({
       user_id: user.id,
       job_id: job.id,
     });
-    onJobAction();
-  };
-
-  const handleDeleteJob = async () => {
-    await fnDeleteJob();
     onJobAction();
   };
 
