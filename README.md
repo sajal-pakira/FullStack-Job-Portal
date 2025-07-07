@@ -39,7 +39,7 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 ### 👤 Candidate:
 
 - Browse and apply to jobs
-- Save favorite jobs
+- Save & view favorite jobs
 - Track application status (`interviewing`, `rejected`,`hired` etc.)
 - Auto-filled user data from Clerk
 
