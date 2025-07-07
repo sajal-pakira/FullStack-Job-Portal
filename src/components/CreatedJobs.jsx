@@ -2,6 +2,7 @@ import { getMyJobs } from "@/api/apiJobs";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect } from "react";
+import { BarLoader } from "react-spinners";
 
 const CreatedJobs = () => {
   const { user, isLoaded } = useUser();
