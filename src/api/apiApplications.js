@@ -65,3 +65,20 @@ export async function updateApplicationStatus(
   }
   return data;
 }
+
+export async function getApplications(token, { user_id }) {
+  const supabase = supabaseClient(token);
+
+  const { data, error } = await supabase
+    .from("applications")
+    .select("*, job:jobs(*, company:companies(name,logo_url))")
+    .eq("candidate_id", user_id);
+  if (error || !data || data.length === 0) {
+    console.log("Error in updating applications status :- ", error);
+    console.log("❌ Update failed");
+
+    console.log("Data:", data);
+    return null;
+  }
+  return data;
+}
