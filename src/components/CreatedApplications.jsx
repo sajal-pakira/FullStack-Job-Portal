@@ -6,21 +6,28 @@ import { BarLoader } from "react-spinners";
 import ApplicationCard from "./ApplicationCard";
 
 const CreatedApplications = () => {
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const {
     fn: fnApplications,
     data: applications,
     loading: loadingApplications,
   } = useFetch(getApplications, {
-    user_id: user.id,
+    user_id: user?.id,
   });
+  console.log("Applications:- ", applications);
 
   useEffect(() => {
-    fnApplications();
-  }, []);
+    if (isLoaded) fnApplications();
+  }, [isLoaded]);
 
-  if (loadingApplications) {
+  if (loadingApplications || !isLoaded) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+  }
+
+  if (!applications || !Array.isArray(applications)) {
+    return (
+      <div className="text-center text-red-500">No applications found.</div>
+    );
   }
 
   return (
