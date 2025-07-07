@@ -39,10 +39,7 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
 export async function getSavedJobs(token) {
   const supabase = supabaseClient(token);
 
-  // await supabaseClient.auth.setSession({
-  //   access_token: token,
-  //   refresh_token: "", // or null if not available
-  // });
+  
 
   const { data, error } = await supabase
     .from("saved_jobs")
