@@ -102,3 +102,21 @@ Create a .env file in the root directory :-
   - Storing jobs and applications
   - Row-Level Security (RLS) for scoped access
   - Resume storage using Supabase Storage
+
+**📸 Previews**
+
+Home Page :-
+
+![Banner](./public/screenshots/HomePage.png)
+
+---
+Post Job Page :-
+
+![Banner](./public/screenshots/PostJob.png)
+
+---
+All Available Jobs Page :-
+
+![Banner](./public/screenshots/All%20available%20Jobs.png)
+
+---
