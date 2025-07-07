@@ -12,7 +12,7 @@ const SavedJobs = () => {
     loading: loadingSavedJobs,
   } = useFetch(getSavedJobs);
 
-  if (isLoaded) {
+  if (!isLoaded || loadingSavedJobs) {
     return <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />;
   }
 
