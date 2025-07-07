@@ -1,4 +1,4 @@
-# 🚀 Full Stack Job Portal
+# 🚀 GetHirrd - Full Stack Job Portal App
 
 A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tailwind CSS. It allows candidates to apply for jobs and recruiters to post and manage job listings in a secure, responsive, and user-friendly environment.
 
@@ -130,3 +130,11 @@ npm run dev
 ```
 
 then visit: http://localhost:5173
+
+## 🧑‍💻 Author
+
+**Sajal Pakira**
+
+- LinkedIn:- [Sajal Pakira](https://www.linkedin.com/in/sajal-pakira-13661b241/)
+- Instagram:- [sajal_pakira](https://www.instagram.com/sajal_pakira?igsh=MXNkNHdvdnc3aDF3ZA==)
+- GitHub:- [sajal-pakira](https://github.com/sajal-pakira)
