@@ -39,8 +39,6 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
 export async function getSavedJobs(token) {
   const supabase = supabaseClient(token);
 
-  
-
   const { data, error } = await supabase
     .from("saved_jobs")
     .select("*, job: jobs(*, company: companies(name,logo_url))");

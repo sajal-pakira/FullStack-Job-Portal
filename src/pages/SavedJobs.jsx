@@ -1,9 +1,14 @@
-import React from 'react'
+import { getSavedJobs } from "@/api/apiJobs";
+import useFetch from "@/hooks/useFetch";
 
 const SavedJobs = () => {
-  return (
-    <div>SavedJobs</div>
-  )
-}
+  const {
+    fn: fnSavedJobs,
+    data: dataSavedJobs,
+    loading: loadingSavedJobs,
+  } = useFetch(getSavedJobs);
 
-export default SavedJobs
+  return <div>SavedJobs</div>;
+};
+
+export default SavedJobs;
