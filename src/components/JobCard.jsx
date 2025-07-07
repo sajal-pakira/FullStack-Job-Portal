@@ -17,8 +17,8 @@ import { BarLoader } from "react-spinners";
 const JobCard = ({
   job,
   savedInit = false,
-  onJobAction = () => {},
   isMyJob = false,
+  onJobAction = () => {},
 }) => {
   const [saved, setSaved] = useState(savedInit);
 
