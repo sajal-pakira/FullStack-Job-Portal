@@ -168,7 +168,7 @@ export async function deleteJob(token, { job_id }) {
 
   if (deleteError) {
     console.error("Error deleting job:", deleteError);
-    return data;
+    return null;
   }
 
   return data;
