@@ -4,7 +4,7 @@ import { useUser } from "@clerk/clerk-react";
 import { BarLoader } from "react-spinners";
 import useFetch from "@/hooks/useFetch";
 
-import JobCard from "@/components/jobCard";
+import JobCard from "@/components/JobCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
