@@ -1,5 +1,7 @@
 const CreatedJobs = () => {
-  return <div>CreatedJobs</div>;
+  return <div>
+    
+  </div>;
 };
 
 export default CreatedJobs;
