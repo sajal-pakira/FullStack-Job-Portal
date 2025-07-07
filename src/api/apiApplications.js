@@ -73,11 +73,9 @@ export async function getApplications(token, { user_id }) {
     .from("applications")
     .select("*, job:jobs(title, company:companies(name))")
     .eq("candidate_id", user_id);
-  if (error || !data || data.length === 0) {
-    console.log("Error in updating applications status :- ", error);
-    console.log("❌ Update failed");
 
-    console.log("Data:", data);
+  if (error) {
+    console.log("Error in fetching Applications :- ", error);
     return null;
   }
   return data;
