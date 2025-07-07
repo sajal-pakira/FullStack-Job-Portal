@@ -21,7 +21,6 @@ const JobCard = ({
   onJobAction = () => {},
 }) => {
   const [saved, setSaved] = useState(savedInit);
-
   const { user } = useUser();
 
   const { loading: loadingDeleteJob, fn: fnDeleteJob } = useFetch(deleteJob, {
