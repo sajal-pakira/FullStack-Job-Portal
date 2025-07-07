@@ -76,7 +76,7 @@ const AddCompanyDrawer = ({ fetchCompanies }) => {
             {...register("logo")}
           />
           <Button
-            type="button"
+            type="submit"
             onClick={handleSubmit(onSubmit)}
             variant="destructive"
             className="w-full"
