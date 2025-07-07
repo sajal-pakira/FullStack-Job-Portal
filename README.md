@@ -58,4 +58,14 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 git clone https://github.com/sajal-pakira/FullStack-Job-Portal.git
 cd FullStack-Job-Portal
 npm install
+``` 
+
+## 🧪 Environment Variables
+Create a .env file in the root directory :-
+
+```bash
+VITE_SUPABASE_URL=https://<your-supabase-project>.supabase.co
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+
 ```
