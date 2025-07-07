@@ -1,9 +1,19 @@
-import React from 'react'
+import { getApplications } from "@/api/apiApplications";
+import useFetch from "@/hooks/useFetch";
+import { useUser } from "@clerk/clerk-react";
+import React from "react";
 
 const CreatedApplications = () => {
-  return (
-    <div>CreatedApplications</div>
-  )
-}
+  const { user } = useUser();
+  const {
+    fn: fnApplications,
+    data: dataApplications,
+    loading: loadingApplications,
+  } = useFetch(getApplications, {
+    user_id: user.id,
+  });
 
-export default CreatedApplications
+  return <div></div>;
+};
+
+export default CreatedApplications;
