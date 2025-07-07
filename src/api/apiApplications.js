@@ -71,7 +71,7 @@ export async function getApplications(token, { user_id }) {
 
   const { data, error } = await supabase
     .from("applications")
-    .select("*, job:jobs(*, company:companies(name,logo_url))")
+    .select("*, job:jobs(title, company:companies(name))")
     .eq("candidate_id", user_id);
   if (error || !data || data.length === 0) {
     console.log("Error in updating applications status :- ", error);
