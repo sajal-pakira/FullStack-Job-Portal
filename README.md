@@ -90,3 +90,15 @@ Create a .env file in the root directory :-
 
 
 ```
+
+**🔒 Authentication**
+
+- Clerk handles sign-up, login, user profile, and role management.
+- Roles are determined via user.unsafeMetadata.role (either "candidate" or "recruiter").
+
+**🛠️ Supabase**
+
+- Supabase used for :-
+  - Storing jobs and applications
+  - Row-Level Security (RLS) for scoped access
+  - Resume storage using Supabase Storage
