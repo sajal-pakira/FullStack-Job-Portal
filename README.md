@@ -8,7 +8,7 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 
 ## 🚀 Live Demo
 
-🔗 [Deployed Link](https://gethirrdbysajalpakira.vercel.app/)
+🔗 [Deployed Link](https://gethirrd-by-sajal-pakira.netlify.app/)
 
 ## 🔧 Tech Stack
 
