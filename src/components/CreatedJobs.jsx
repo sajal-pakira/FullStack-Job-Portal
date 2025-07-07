@@ -1,9 +1,10 @@
 import { getMyJobs } from "@/api/apiJobs";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
+import { useEffect } from "react";
 
 const CreatedJobs = () => {
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
 
   const {
     fn: fnCreatedJobs,
@@ -12,6 +13,11 @@ const CreatedJobs = () => {
   } = useFetch(getMyJobs, {
     recruiter_id: user.id,
   });
+
+  useEffect(() => {
+    if (isLoaded) fnCreatedJobs();
+  }, [isLoaded]);
+
   return <div></div>;
 };
 
