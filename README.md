@@ -21,7 +21,7 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 
 **Backend & Auth:**
 
-- [Supabase](https://supabase.io/): used as backend and database (PostgreSQL)
+- [Supabase](https://supabase.io/) :- used as backend and database (PostgreSQL)
 - [Row-Level Security (RLS)](https://supabase.com/docs/learn/auth-deep-dive/auth-row-level-security) with Supabase for secure access
 - Clerk + Supabase JWT integration
 
@@ -36,14 +36,14 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 
 ## 🔐 Features
 
-### 👤 Candidate:
+### 👤 Candidate :-
 
 - Browse and apply to jobs
 - Save & view favorite jobs
 - Track application status (`interviewing`, `rejected`,`hired` etc.)
 - Auto-filled user data from Clerk
 
-### 🧑‍💼 Recruiter:
+### 🧑‍💼 Recruiter :-
 
 - Post new jobs with detailed descriptions
 - View all posted jobs
@@ -52,7 +52,7 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 
 ---
 
-## 🗃️ Folder Structure
+## 🗃️ Folder Structure :-
 
 Create a .env file in the root directory :-
 
@@ -61,13 +61,13 @@ Create a .env file in the root directory :-
 │   ├── logo.png
 │   └── companies/
 ├── src/
-│   ├── api/                   # Supabase queries
+│   ├── api/           # Supabase queries
 │   ├── components/    # UI components (JobCard, Header, ProtectedRoute etc.)
-│   ├── hooks/              # Custom hooks (useFetch, useDebounce etc.)
-│   ├── layouts/            # App layout
-│   ├── pages/              # Route pages
-│   ├── styles/              # Tailwind and custom CSS
-│   └── utils/                # Helper utilities
+│   ├── hooks/         # Custom hooks (useFetch, useDebounce etc.)
+│   ├── layouts/       # App layout
+│   ├── pages/         # Route pages
+│   ├── styles/        # Tailwind and custom CSS
+│   └── utils/         # Helper utilities
 
 
 ```
@@ -135,6 +135,6 @@ then visit: http://localhost:5173
 
 **Sajal Pakira**
 
-- LinkedIn:- [Sajal Pakira](https://www.linkedin.com/in/sajal-pakira-13661b241/)
-- Instagram:- [sajal_pakira](https://www.instagram.com/sajal_pakira?igsh=MXNkNHdvdnc3aDF3ZA==)
-- GitHub:- [sajal-pakira](https://github.com/sajal-pakira)
+- LinkedIn :- [Sajal Pakira](https://www.linkedin.com/in/sajal-pakira-13661b241/)
+- Instagram :- [sajal_pakira](https://www.instagram.com/sajal_pakira?igsh=MXNkNHdvdnc3aDF3ZA==)
+- GitHub :- [sajal-pakira](https://github.com/sajal-pakira)
