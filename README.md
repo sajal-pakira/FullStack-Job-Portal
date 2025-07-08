@@ -14,7 +14,7 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 
 ## 🔧 Tech Stack
 
-**Frontend:**
+**Frontend :-**
 
 - [React 19](https://reactjs.org/) with [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/) with `tailwind-variants` & `tailwindcss-animate`
@@ -25,13 +25,13 @@ A modern, full-stack job portal built with React, Vite, Supabase, Clerk, and Tai
 - [React Spinners](https://www.davidhu.io/react-spinners/) for loaders
 - [Lucide Icons](https://lucide.dev/icons/) for beautiful UI icons
 
-**Backend & Auth:**
+**Backend & Auth :-**
 
 - [Supabase](https://supabase.io/) :- used as backend and database (PostgreSQL)
 - [Row-Level Security (RLS)](https://supabase.com/docs/learn/auth-deep-dive/auth-row-level-security) with Supabase for secure access
 - Clerk + Supabase JWT integration
 
-**Others:**
+**Others :-**
 
 - ESLint for linting
 - PostCSS & autoprefixer
